@@ -1,8 +1,16 @@
 import Vue from 'vue'
 import App from './App'
+import VueRouter from 'vue-router'
+import Home from './components/home'
 
-/* eslint-disable no-new */
-new Vue({
-  el: 'body',
-  components: { App }
+Vue.use(VueRouter)
+
+var router = new VueRouter()
+
+router.map({
+  '/': {
+    component: Home
+  }
 })
+
+router.start(App, 'app')

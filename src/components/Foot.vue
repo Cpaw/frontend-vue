@@ -1,7 +1,7 @@
 <template>
     <footer>
         <div class="container">
-            Cpaw CTF
+            {{data}}
         </div>
     </footer>
 </template>
@@ -9,7 +9,9 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      data: 'Cpaw CTF'
+    }
   }
 }
 </script>
