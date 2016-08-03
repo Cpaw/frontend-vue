@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <topnav></topnav>
+    <foot></foot>
   </div>
 </template>
 
 <script>
 import Topnav from './components/Topnav'
+import Foot from './components/Foot'
 
 export default {
   components: {
-    Topnav
+    Topnav,
+    Foot
   }
 }
 </script>
