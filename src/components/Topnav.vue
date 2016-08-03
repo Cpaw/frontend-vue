@@ -3,7 +3,7 @@
       <div class="container">
           <nav>
               <ul class="topnav" id="toggleNav">
-                  <li><a href="index.html">Home</a></li>
+                  <li><a v-link={ path : '/home' }>Home</a></li>
                   <li><a href="about.html">About</a></li>
                   <li><a href="questions.html">Questions</a></li>
                   <li><a href="ranking.html">Ranking</a></li>

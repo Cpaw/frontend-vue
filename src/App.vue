@@ -1,15 +1,19 @@
 <template>
   <div id="app">
     <topnav></topnav>
+    <router-view></router-view>
+    <foot></foot>
   </div>
 </template>
 
 <script>
 import Topnav from './components/Topnav'
+import Foot from './components/Foot'
 
 export default {
   components: {
-    Topnav
+    Topnav,
+    Foot
   }
 }
 </script>
