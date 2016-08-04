@@ -1,20 +1,4 @@
 <template>
-        <header>
-            <div class="container">
-                <nav>
-                    <ul class="topnav" id="toggleNav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="questions.html">Questions</a></li>
-                        <li><a href="ranking.html">Ranking</a></li>
-                        <li><a href="notice.html">Notice</a></li>
-                        <li class="icon">
-                            <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
 		<article>
 			<div class="container">
 				<div class="genre">
@@ -207,11 +191,6 @@
 				</div>
 			</div>
 		</article>
-		<footer>
-            <div class="container">
-                footer
-            </div>
-	</footer>
 </template>
 
 
