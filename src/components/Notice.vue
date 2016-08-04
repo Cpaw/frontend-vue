@@ -29,24 +29,8 @@
 	</article>
 </template>
 
-
-
 <script>
-
-var note = new Vue({
-  el: '#note',
-  data: {
-    notices: [
-      { title: 'お知らせ' },
-      { message: '問題を追加しました。' }
-      { date: '2016/8/4' }
-    ]
-  }
-})
-
 </script>
-
-
 
 <style scoped>
 .notice_container {
