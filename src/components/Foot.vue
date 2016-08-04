@@ -28,5 +28,7 @@ footer
     line-height: 40px;
     color: #f2f2f2;    
     background-color: #333;
+    border-top: 2px solid #2ad;
+    box-shadow: 0px 1px 10px #2ad;
 }
 </style>

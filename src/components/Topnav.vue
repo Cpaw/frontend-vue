@@ -47,12 +47,16 @@ header
     position: fixed;
     top: 0;
     background-color: #333;
+    border-bottom: 2px solid #2ad;
+    box-shadow: 0px 1px 10px #2ad;
     z-index: 999;
 }
+
 nav
 {
     overflow: auto;  
 }
+
 ul.topnav {
     height: 100%;
     list-style-type: none;
