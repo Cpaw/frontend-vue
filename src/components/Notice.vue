@@ -12,9 +12,7 @@
                         <ul id="object">
                         <li v-for="notice in notices">
                             <div class="notice_internal">
-                                <title>
-                                        {{ $key }} : {{ notice }}
-                                </title>
+                                {{ notice.title }}
                             </div>
                             <div class="notice_contents">
                                 {{ notice.messages }}
@@ -39,6 +37,26 @@ export default {
           title: 'お知らせ',
           messages: '問題が更新されました。',
           date: '2016/8/3'
+        },
+        {
+          title: 'お知らせ',
+          messages: '問題が更新されました。',
+          date: '2016/8/3'
+        },
+        {
+          title: 'お知らせ',
+          messages: '問題が更新されました。',
+          date: '2016/8/3'
+        },
+        {
+          title: 'お知らせ',
+          messages: '問題が更新されました。',
+          date: '2016/8/3'
+        },
+        {
+          title: 'お知らせ',
+          messages: '問題が更新されました。',
+          date: '2016/8/3'
         }
       ]
     }
@@ -51,18 +69,30 @@ export default {
 <style scoped>
 .notice_container {
 	margin: 100px 0px;
-	padding-bottom: 10px;
+	padding: 1em;
 	background-color: #aaa;
 }
 
 .notice_internal {
-	margin: 30px;
+	margin: 30px 0;
+	width: 100%;
 	background-color: #ccc;
-	padding:5px;
+	padding:1em 0;
+}
+
+.notice_container li {
+        list-style-type: none;
 }
 
 .notice_footer {
+	padding:1em;
 	text-align: right;
+}
+
+ul {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
 }
 
 ul.menu {
@@ -78,18 +108,18 @@ ul.menu li
 {
 	text-align: center;
 	width: 33%;
-    float: left;
+	float: left;
 }
 
 ul.menu li a 
 {
-	width: 100%;
-    display: inline-block;
-    color: #ccc;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+	width: 90%;
+	display: inline-block;
+	color: #ccc;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
 }
 
 ul.menu li a:hover 
