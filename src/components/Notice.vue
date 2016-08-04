@@ -9,15 +9,15 @@
                             <li><a href="">Bug</a></li>
                         </ul>
                     </nav>
-		    	<ul id="note">
+		    	<ul id="object">
 			    <li v-for="notice in notices">
                 	        <div class="notice_internal">
                 	            <title>
-                    	               {{ notice.title }}   
+                    	               {{ $key }} : {{ notice }}
                   	            </title>
 				</div>
                 	        <div class="notice_contents">
-                	            {{ notice.contents }}
+                	            {{ notice.messages }}
                 	        </div>
                 	        <div class="notice_footer">
                 	            {{ notice.date }}        
@@ -29,8 +29,26 @@
 	</article>
 </template>
 
+
 <script>
+import Vue from 'vue'
+var test = new Vue({
+  el: '#object',
+  data: {
+    notices: {
+      title: 'お知らせ',
+      messages: '問題が更新されました。',
+      date: '2016/8/3'
+    }
+  }
+})
+
+export default {
+  props: test
+}
+
 </script>
+
 
 <style scoped>
 .notice_container {
