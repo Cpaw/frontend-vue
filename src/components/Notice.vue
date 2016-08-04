@@ -1,32 +1,31 @@
 <template>
-        <article>
-    		<div class="container">
-                <div class="notice_container">
-                    <nav>
-                        <ul class="menu">
-                            <li><a href="">Notice</a></li>
-                            <li><a href="">Update</a></li>
-                            <li><a href="">Bug</a></li>
-                        </ul>
-                    </nav>
-                        <ul id="object">
-                        <li v-for="notice in notices">
-                            <div class="notice_internal">
-                                {{ notice.title }}
-                            </div>
-                            <div class="notice_contents">
-                                {{ notice.messages }}
-                            </div>
-                            <div class="notice_footer">
-                                {{ notice.date }}        
-                            </div>
-                        </li>
+    <article>
+        <div class="container">
+            <div class="notice_container">
+                <nav>
+                    <ul class="menu">
+                        <li><a href="">Notice</a></li>
+                        <li><a href="">Update</a></li>
+                        <li><a href="">Bug</a></li>
                     </ul>
-               	</div>
-        	</div>
-	</article>
+                </nav>
+                    <ul id="object">
+                    <li v-for="notice in notices">
+                        <div class="notice_internal">
+                            {{ notice.title }}
+                        </div>
+                        <div class="notice_contents">
+                            {{ notice.messages }}
+                        </div>
+                        <div class="notice_footer">
+                            {{ notice.date }}        
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </article>
 </template>
-
 
 <script>
 export default {
@@ -62,15 +61,12 @@ export default {
     }
   }
 }
-
 </script>
-
 
 <style scoped>
 .notice_container {
 	margin: 100px 0px;
 	padding: 1em;
-	background-color: #aaa;
 }
 
 .notice_internal {
@@ -130,6 +126,12 @@ ul.menu li a:hover
 ul.menu li.icon 
 {
     display: none;
+}
+
+ul.note
+{
+   	padding-bottom: 10px;
+	background-color: #aaa;
 }
 
 </style>

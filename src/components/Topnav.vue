@@ -8,8 +8,8 @@
                   <li><a v-link="{ path : '/questions' }">Questions</a></li>
                   <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
                   <li><a v-link="{ path : '/notice' }">Notice</a></li>
-                  <li class="rightalign"><a href="signup.html">Sign up</a></li>
-                  <li class="rightalign"><a href="signin.html">Sign in</a></li>
+                  <li class="rightalign"><a v-link="{ path : '/signup' }">Sign up</a></li>
+                  <li class="rightalign"><a v-link="{ path : '/signin' }">Sign in</a></li>
                   <li class="icon">
                       <a href="javascript:void(0);" @click="toggle('toggleNav')">&#9776;</a>
                   </li>
@@ -47,12 +47,16 @@ header
     position: fixed;
     top: 0;
     background-color: #333;
+    border-bottom: 2px solid #2ad;
+    box-shadow: 0px 1px 10px #2ad;
     z-index: 999;
 }
+
 nav
 {
     overflow: auto;  
 }
+
 ul.topnav {
     height: 100%;
     list-style-type: none;

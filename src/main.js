@@ -21,7 +21,7 @@ router.map({
   '/about': {
     component: About
   },
-  '/questions': {
+  '/questions/web': {
     component: Questions
   },
   '/ranking': {
@@ -30,6 +30,13 @@ router.map({
   '/notice': {
     component: Notice
   }
+})
+
+router.redirect({
+  '/questions': '/questions/web',
+
+  // 見つからなかったルートは /home にリダイレクト
+  '*': '/home'
 })
 
 router.start(App, 'app')

@@ -26,6 +26,9 @@ html, body
   margin: 0;
   padding: 0;
   background-color: #444;
+  background: radial-gradient(ellipse at center, #555 0%,#222 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .container
