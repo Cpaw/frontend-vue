@@ -1,32 +1,32 @@
 <template>
-        <article>
-    		<div class="container">
-                <div class="notice_container">
-                    <nav>
-                        <ul class="menu">
-                            <li><a href="">Notice</a></li>
-                            <li><a href="">Update</a></li>
-                            <li><a href="">Bug</a></li>
-                        </ul>
-                    </nav>
-		    	<ul id="note">
-			    <li v-for="notice in notices">
-                	        <div class="notice_internal">
-                	            <title>
-                    	               {{ notice.title }}   
-                  	            </title>
-				</div>
-                	        <div class="notice_contents">
-                	            {{ notice.contents }}
-                	        </div>
-                	        <div class="notice_footer">
-                	            {{ notice.date }}        
-                	        </div>
-    			    </li>
- 			</ul>
-               	</div>
-        	</div>
-	</article>
+    <article>
+        <div class="container">
+            <div class="contents">
+                <nav>
+                    <ul class="menu">
+                        <li><a href="">Notice</a></li>
+                        <li><a href="">Update</a></li>
+                        <li><a href="">Bug</a></li>
+                    </ul>
+                </nav>
+                <ul id="note">
+                    <li v-for="notice in notices">
+                        <div class="notice_internal">
+                            <title>
+                                    {{ notice.title }}   
+                            </title>
+                        </div>
+                        <div class="notice_contents">
+                            {{ notice.contents }}
+                        </div>
+                        <div class="notice_footer">
+                            {{ notice.date }}        
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </article>
 </template>
 
 <script>
@@ -34,7 +34,6 @@
 
 <style scoped>
 .notice_container {
-	margin: 100px 0px;
 	padding-bottom: 10px;
 	background-color: #aaa;
 }
@@ -84,6 +83,12 @@ ul.menu li a:hover
 ul.menu li.icon 
 {
     display: none;
+}
+
+ul.note
+{
+   	padding-bottom: 10px;
+	background-color: #aaa;
 }
 
 </style>

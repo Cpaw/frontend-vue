@@ -5,42 +5,36 @@
                 <div class="genrenavbar">
                     <nav>
                         <ul class="genrenav">
-                            <li><a class="current" href="">GrassLand</a></li>
-                            <li><a href="">Mountain</a></li>
-                            <li><a href="">Volcano</a></li>
+                            <li><a class="current" href="">Web</a></li>
+                            <li><a href="">Binary</a></li>
+                            <li><a href="">Forensics</a></li>
+                            <li><a href="">Misc.</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="readable">
                     <div class="smallbox ">
-                        <h2>Web - Grassland</h2>
+                        <h2>Web</h2>
                         <div class="aQuestionHead">
-                            <div class="qitem width15"></div>
-                            <div class="qitem width05">#</div>
-                            <div class="qitem width40">Title</div>
+                            <div class="qitem width10 center">#</div>
+                            <div class="qitem width50">Title</div>
                             <div class="qitem width15">Category</div>
                             <div class="qitem width10">Score</div>
                             <div class="qitem width15"></div>
                         </div>
                         <div class="aQuestion solvedquestion">
-                            <div class="qitem width15 qicon">
-                                <img src="">
-                            </div>
-                            <div class="qitem width05">1</div>
-                            <div class="qitem width40">Fitst Example Task</div>
+                            <div class="qitem width10 center">1</div>
+                            <div class="qitem width50">Fitst Example Task</div>
                             <div class="qitem width15">Category</div>
                             <div class="qitem width10">100</div>
                             <div class="qitem width15">solved</div>
                         </div>
                         <div class="aQuestion">
-                            <div class="qitem width15 qicon">
-                                <img src="">
-                            </div>
-                            <div class="qitem width05">2</div>
-                            <div class="qitem width40"><a href="question.html">Sescond Challenge</a></div>
+                            <div class="qitem width10 center">2</div>
+                            <div class="qitem width50"><a href="question.html">Sescond Challenge</a></div>
                             <div class="qitem width15">Category</div>
                             <div class="qitem width10">100</div>
-                            <div class="qitem width15">solved</div>
+                            <div class="qitem width15"></div>
                         </div>
                     </div>
                 </div>
@@ -146,6 +140,8 @@
 .width40 {width: 40%;}
 .width45 {width: 45%;}
 .width50 {width: 50%;}
+
+.center {text-align: center;}
 
 .aQuestionHead
 {

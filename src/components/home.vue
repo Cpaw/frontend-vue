@@ -7,3 +7,11 @@
       </div>
   </article>
 </template>
+
+<style scoped>
+h1
+{
+  text-align: center;
+  color: #fff;
+}
+</style>
