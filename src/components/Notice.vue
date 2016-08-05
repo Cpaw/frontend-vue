@@ -33,19 +33,9 @@ export default {
   data () {
     var notices = [
       {
-        title: 'お知らせ',
-        messages: '問題が更新されました。',
-        date: '2016/8/3'
-      },
-      {
-        title: 'お知らせ',
-        messages: '問題が更新されました。',
-        date: '2016/8/4'
-      },
-      {
-        title: 'お知らせ',
-        messages: '問題が更新されました。',
-        date: '2016/8/5'
+        title: 'test',
+        messages: 'hello',
+        date: '2016/8/20'
       }
     ]
     return {notices}
