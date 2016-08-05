@@ -5,10 +5,10 @@
                 <div class="genrenavbar">
                     <nav>
                         <ul class="genrenav">
-                            <li><a class="current" href="">Web</a></li>
-                            <li><a href="">Binary</a></li>
-                            <li><a href="">Forensics</a></li>
-                            <li><a href="">Misc.</a></li>
+                            <li><a v-bind:class="{ 'current': isWeb }" v-link="{path : '/questions/web' }">Web</a></li>
+                            <li><a v-bind:class="{ 'current': isBin }" v-link="{ path : '/questions/binary' }">Binary</a></li>
+                            <li><a v-bind:class="{ 'current': isFor }" v-link="{ path : '/questions/forensics' }">Forensics</a></li>
+                            <li><a v-bind:class="{ 'current': isMis }" v-link="{ path : '/questions/misc' }">Misc.</a></li>
                         </ul>
                     </nav>
                 </div>

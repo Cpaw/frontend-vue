@@ -1,21 +1,21 @@
 <template>
   <header>
-      <div class="container">
-          <nav>
-              <ul class="topnav" id="toggleNav">
-                  <li v-link-active><a v-link="{ path : '/home' }">Home</a></li>
-                  <li v-link-active><a v-link="{ path : '/about' }">About</a></li>
-                  <li><a v-link="{ path : '/questions' }">Questions</a></li>
-                  <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
-                  <li><a v-link="{ path : '/notice' }">Notice</a></li>
-                  <li class="rightalign"><a v-link="{ path : '/signup' }">Sign up</a></li>
-                  <li class="rightalign"><a v-link="{ path : '/signin' }">Sign in</a></li>
-                  <li class="icon">
-                      <a href="javascript:void(0);" @click="toggle('toggleNav')">&#9776;</a>
-                  </li>
-              </ul>
-          </nav>
-      </div>
+    <div class="container">
+      <nav>
+        <ul class="topnav" id="toggleNav">
+          <li v-link-active><a v-link="{ path : '/home' }">Home</a></li>
+          <li v-link-active><a v-link="{ path : '/about' }">About</a></li>
+          <li><a v-link="{ path : '/questions' }">Questions</a></li>
+          <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
+          <li><a v-link="{ path : '/notice' }">Notice</a></li>
+          <li class="rightalign"><a v-link="{ path : '/signup' }">Sign up</a></li>
+          <li class="rightalign"><a v-link="{ path : '/signin' }">Sign in</a></li>
+          <li class="icon">
+              <a href="javascript:void(0);" @click="toggle('toggleNav')">&#9776;</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -37,7 +37,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 header
 {
