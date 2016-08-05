@@ -38,6 +38,7 @@ body
 .container
 {
   width:85%;
+  max-width: 1024px;
   margin: 0 auto;
 }
 
