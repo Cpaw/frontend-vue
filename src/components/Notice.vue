@@ -33,11 +33,14 @@ export default {
   data () {
     var notices = [
       {
-        title: 'test',
-        messages: 'hello',
-        date: '2016/8/20'
+        title: '',
+        messages: '',
+        date: ''
       }
     ]
+    notices[0].title = 'test'
+    notices[0].messages = 'hello world'
+    notices[0].date = '2016/8/5'
     return {notices}
   }
 }
