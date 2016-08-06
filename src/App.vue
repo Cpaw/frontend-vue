@@ -30,9 +30,7 @@ html, body
 
 body
 {
-  background: radial-gradient(ellipse at center, #555 0%,#222 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: radial-gradient(#555,#222);
 }
 
 .container
