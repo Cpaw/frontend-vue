@@ -21,7 +21,7 @@ router.map({
   '/about': {
     component: About
   },
-  '/questions/web': {
+  '/questions/:genre': {
     component: Questions
   },
   '/ranking': {

@@ -5,16 +5,16 @@
                 <div class="genrenavbar">
                     <nav>
                         <ul class="genrenav">
-                            <li><a class="current" href="">Web</a></li>
-                            <li><a href="">Binary</a></li>
-                            <li><a href="">Forensics</a></li>
-                            <li><a href="">Misc.</a></li>
+                            <li><a v-bind:class="{ 'current': isWeb }" v-link="{path : '/questions/web' }">Web</a></li>
+                            <li><a v-bind:class="{ 'current': isBin }" v-link="{ path : '/questions/binary' }">Binary</a></li>
+                            <li><a v-bind:class="{ 'current': isFor }" v-link="{ path : '/questions/forensics' }">Forensics</a></li>
+                            <li><a v-bind:class="{ 'current': isMis }" v-link="{ path : '/questions/misc' }">Misc.</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="readable">
                     <div class="smallbox ">
-                        <h2>Web</h2>
+                        <h2>{{ $route.params.genre }}</h2>
                         <div class="aQuestionHead">
                             <div class="qitem width10 center">#</div>
                             <div class="qitem width50">Title</div>
@@ -47,33 +47,6 @@
 </script>
 
 <style scoped>
-    
-.readable
-{
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  margin-bottom: 5px;
-  padding: 0;
-  background-color: rgba(34,34,34,0.7);
-  color: rgb(200,200,200);
-}
-
-.readable h2
-{
-    margin:0;
-    color: rgb(200,200,200);
-}
-
-.smallbox
-{
-    width:90%;
-    height: 90%;
-    margin: 0 auto;
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
-
 .aQuestion
 {
   min-height: 50px;
@@ -180,7 +153,7 @@
 
 .genrenavbar
 {
-    background-color: #333;
+    background-color: #444;
 }
 
 ul.genrenav {
