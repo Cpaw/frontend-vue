@@ -30,35 +30,17 @@
 <script>
 export default {
   data () {
-    return {
-      notices: [
-        {
-          title: 'お知らせ',
-          messages: '問題が更新されました。',
-          date: '2016/8/3'
-        },
-        {
-          title: 'お知らせ',
-          messages: '問題が更新されました。',
-          date: '2016/8/3'
-        },
-        {
-          title: 'お知らせ',
-          messages: '問題が更新されました。',
-          date: '2016/8/3'
-        },
-        {
-          title: 'お知らせ',
-          messages: '問題が更新されました。',
-          date: '2016/8/3'
-        },
-        {
-          title: 'お知らせ',
-          messages: '問題が更新されました。',
-          date: '2016/8/3'
-        }
-      ]
-    }
+    var notices = [
+      {
+        title: '',
+        messages: '',
+        date: ''
+      }
+    ]
+    notices[0].title = 'test'
+    notices[0].messages = 'hello world'
+    notices[0].date = '2016/8/5'
+    return {notices}
   }
 }
 </script>
