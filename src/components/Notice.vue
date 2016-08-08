@@ -29,6 +29,7 @@
 
 
 <script>
+var $ = require('jquery')
 export default {
   data () {
     var notices = [
@@ -42,6 +43,24 @@ export default {
     notices[0].messages = 'hello world'
     notices[0].date = '2016/8/5'
     return {notices}
+  },
+  ready: function () {
+    this.getJson()
+  },
+  methods: {
+    getJson: function () {
+      var that = this
+      $.ajax({
+        type: 'GET',
+        crossDomain: true,
+        url: 'https://qiita.com/api/v2/items?page=1&per_page=5',
+        dataType: 'json',
+        success: function (json) {
+          that.$data.items = json
+        },
+        data: null
+      })
+    }
   }
 }
 </script>
