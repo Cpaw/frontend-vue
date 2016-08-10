@@ -39,9 +39,6 @@ export default {
         date: ''
       }
     ]
-    notices[0].title = 'test'
-    notices[0].messages = 'hello world'
-    notices[0].date = '2016/8/5'
     return {notices}
   },
   ready: function () {
@@ -53,10 +50,10 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: 'https://qiita.com/api/v2/items?page=1&per_page=5',
+        url: 'http://localhost:3000/posts',
         dataType: 'json',
         success: function (json) {
-          that.$data.items = json
+          that.$data.notices = json
         },
         data: null
       })
