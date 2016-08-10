@@ -25,12 +25,14 @@ html, body
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #444;
+  background-color: #222;
 }
 
-body
-{
-  background: radial-gradient(#555,#222);
+#app {
+  min-height: 100%;
+  background-image: url("./img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container
@@ -71,5 +73,4 @@ body
     padding-top: 1em;
     padding-bottom: 1em;
 }
-
 </style>
