@@ -45,9 +45,7 @@ header
     padding: 0;
     position: fixed;
     top: 0;
-    background-color: #333;
-    border-bottom: 2px solid #2ad;
-    box-shadow: 0px 1px 10px #2ad;
+    background-color: #222;
     z-index: 999;
 }
 
@@ -101,10 +99,6 @@ ul.topnav li.icon
     float: right;
     display: inline-block;
   }
-}
-
-@media screen and (max-width:750px) 
-{
   ul.topnav.responsive {position: relative;}
   ul.topnav.responsive li.icon {
     position: absolute;
