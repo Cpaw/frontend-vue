@@ -1,7 +1,7 @@
 <template>
     <article>
         <div class="container">
-            <div class="notice_container">
+            <div class="contents notice_container">
                 <nav>
                     <ul class="menu">
                         <li><a href="">Notice</a></li>
@@ -62,11 +62,6 @@ export default {
 </script>
 
 <style scoped>
-.notice_container {
-	margin: 100px 0px;
-	padding: 1em;
-}
-
 .notice_internal {
 	margin: 30px 0;
 	width: 100%;
