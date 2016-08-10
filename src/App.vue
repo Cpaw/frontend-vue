@@ -33,6 +33,7 @@ html, body
   background-image: url("./img/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .container
