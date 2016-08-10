@@ -28,6 +28,7 @@
 </template>
 
 <script>
+var $ = require('jquery')
 export default {
   data () {
     var notices = [
@@ -37,10 +38,25 @@ export default {
         date: ''
       }
     ]
-    notices[0].title = 'test'
-    notices[0].messages = 'hello world'
-    notices[0].date = '2016/8/5'
     return {notices}
+  },
+  ready: function () {
+    this.getJson()
+  },
+  methods: {
+    getJson: function () {
+      var that = this
+      $.ajax({
+        type: 'GET',
+        crossDomain: true,
+        url: 'http://localhost:3000/posts',
+        dataType: 'json',
+        success: function (json) {
+          that.$data.notices = json
+        },
+        data: null
+      })
+    }
   }
 }
 </script>
