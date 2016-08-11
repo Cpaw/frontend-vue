@@ -52,16 +52,7 @@ export default {
         updated_at: ''
       }
     ]
-    var challengeList = [
-      {
-        id: 0,
-        title: '',
-        category: '',
-        score: 0,
-        progress: 0,
-        isCompleted: false
-      }
-    ]
+    var challengeList = []
     return {categoryList, challengeList}
   },
   ready: function () {
@@ -109,7 +100,7 @@ export default {
         }
       )
 
-      $.when(userInfo, challengesInfo, this.categoryList).done(function (user, challenges, cList) {
+      $.when(userInfo, challengesInfo, this).done(function (user, challenges, vm) {
         var teamInfo = $.ajax(
           {
             url: apiroot + 'teams/' + user.team,
@@ -119,7 +110,7 @@ export default {
           }
         )
 
-        $.when(teamInfo, cList).done(function (team, cList) {
+        $.when(teamInfo, vm).done(function (team, vm) {
           for (var i in challenges) {
             var challenge = challenges[i]
 
@@ -143,7 +134,7 @@ export default {
                 isChallengeCompleted = false
               }
 
-              var categoryString = cList.filter(function (item, index) {
+              var categoryString = vm.categoryList.filter(function (item, index) {
                 if (item.id === genreid) return true
               })
 
