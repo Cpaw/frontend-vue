@@ -2,19 +2,9 @@
     <article>
         <div class="container">
             <div class="contents bg-field">
-                <div class="genrenavbar">
-                    <nav>
-                        <ul class="genrenav">
-                            <li><a v-link="{ path : '/questions/web' }">Web</a></li>
-                            <li><a v-link="{ path : '/questions/binary' }">Binary</a></li>
-                            <li><a v-link="{ path : '/questions/forensics' }">Forensics</a></li>
-                            <li><a v-link="{ path : '/questions/misc' }">Misc.</a></li>
-                        </ul>
-                    </nav>
-                </div>
+                <genrenav></genrenav>
                 <div class="readable">
                     <div class="smallbox ">
-                        <h2>{{ $route.params.genre }}</h2>
                         <div class="rowHead">
                             <div class="cell width10 center">#</div>
                             <div class="cell width50">Title</div>
@@ -48,6 +38,10 @@
 </template>
 
 <script>
+import Genrenav from './Genrenav.vue'
+export default {
+  components: { Genrenav }
+}
 </script>
 
 <style scoped>
@@ -109,50 +103,5 @@ div.cell
   border-bottom: 1px solid #eee;
   color: #fff;
   clear: both;
-}
-
-/*****************
- GENRE NAVIGATION
-*****************/
-
-.genrenavbar { background-color: #444; }
-
-ul.genrenav
-{
-    height: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-ul.genrenav li { float: left; }
-
-ul.genrenav li a
-{
-    display: inline-block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-ul.genrenav li a.current { background-color: #666; }
-ul.genrenav li a:hover { background-color: #555; }
-
-@media screen and (max-width:680px)
-{
-  ul.genrenav {position: relative;}
-  ul.genrenav li
-  {
-    float: none;
-    display: inline;
-  }
-  ul.genrenav li a
-  {
-    display: block;
-    text-align: left;
-  }
 }
 </style>
