@@ -46,7 +46,7 @@ export default {
     var categoryList = [
       {
         id: 0,
-        name: '',
+        name: 'null',
         ordering: 0,
         created_at: '',
         updated_at: ''
