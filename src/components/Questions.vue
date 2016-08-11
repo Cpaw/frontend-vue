@@ -19,7 +19,7 @@
                                     <div class="cell width50">{{ item.title }}</div>
                                     <div class="cell width15">{{ item.category }}</div>
                                     <div class="cell width10">{{ item.score }}</div>
-                                    <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : '' }}</div>
+                                    <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : item.progress }}</div>
                                 </a>
                             </div>
                         </div>                        
