@@ -1,76 +1,158 @@
 <template>
-    <article>
-        <div class="container">
-            <div class="contents bg-field">
-                <genrenav></genrenav>
-                <div class="readable">
-                    <div class="smallbox ">
-                        <div class="rowHead">
-                            <div class="cell width10 center">#</div>
-                            <div class="cell width50">Title</div>
-                            <div class="cell width15">Category</div>
-                            <div class="cell width10">Score</div>
-                            <div class="cell width15"></div>
-                        </div>
-                        <div v-for="item in challenges">
-                            <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
-                                <a v-link="{ path : '/question/' + item.id }">
-                                    <div class="cell width10 center leftcell">{{ $index + 1 }}</div>
-                                    <div class="cell width50">{{ item.title }}</div>
-                                    <div class="cell width15">{{ item.category }}</div>
-                                    <div class="cell width10">{{ item.score }}</div>
-                                    <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : '' }}</div>
-                                </a>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-            </div>
+  <article>
+    <div class="container">
+      <div class="contents bg-field">
+        <div class="genrenavbar">
+          <nav>
+            <ul class="genrenav">
+              <li v-for="item in categoryList">
+                <a v-link="{ path : '/questions/' + item.id }">{{ item.name }}</a>
+              </li>
+            </ul>
+          </nav>
         </div>
-    </article>
+        <div class="readable">
+          <div class="smallbox ">
+            <div class="rowHead">
+              <div class="cell width10 center">#</div>
+              <div class="cell width50">Title</div>
+              <div class="cell width15">Category</div>
+              <div class="cell width10">Score</div>
+              <div class="cell width15">Progress</div>
+            </div>
+            <div v-for="item in challengeList">
+              <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
+                <a v-link="{ path : '/question/' + item.id }">
+                  <div class="cell width10 center leftcell">{{ $index + 1 }}</div>
+                  <div class="cell width50">{{ item.title }}</div>
+                  <div class="cell width15">{{ item.category }}</div>
+                  <div class="cell width10">{{ item.score }}</div>
+                  <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : item.progress + '%' }}</div>
+                </a>
+              </div>
+            </div>                        
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
 </template>
 
 <script>
-import Genrenav from './Genrenav.vue'
+var $ = require('jquery')
+var apiroot = 'http://localhost/api/'
 export default {
   data: function () {
-    var challenges = [
+    var categoryList = [
       {
-        id: 1,
-        title: 'test',
-        category: 'web',
-        score: '100',
-        isCompleted: false
+        id: 0,
+        name: 'null',
+        ordering: 0,
+        created_at: '',
+        updated_at: ''
       }
     ]
-    return {challenges}
+    var challengeList = []
+    return {categoryList, challengeList}
   },
-  components: { Genrenav },
+  ready: function () {
+    this.getCategoryList()
+  },
   watch: {
     '$route.params.genre': function (val, oldVal) {
-      console.log('new: %s, old: %s', val, oldVal)
       this.fetchData()
     }
   },
   methods: {
-    fetchData: function () {
-      console.log('OK')
-      this.challenges = [
+    getCategoryList: function () {
+      $.ajax(
         {
-          id: 1,
-          title: 'test',
-          category: this.$route.params.genre,
-          score: '150',
-          isCompleted: true
-        },
-        {
-          id: 2,
-          title: 'test2',
-          category: this.$route.params.genre,
-          score: '9999',
-          isCompleted: false
+          url: apiroot + 'categories/',
+          crossDomain: true,
+          type: 'GET',
+          dataType: 'json',
+          success: function (json) {
+            this.categoryList = json
+          }
         }
-      ]
+      )
+    },
+    fetchData: function () {
+      var genreid = this.$route.params.genre
+
+      var challengeInfoForRender = []
+
+      var userInfo = $.ajax(
+        {
+          url: apiroot + 'auth/',
+          crossDomain: true,
+          type: 'GET',
+          dataType: 'json'
+        }
+      )
+
+      var challengesInfo = $.ajax(
+        {
+          url: apiroot + 'questions/',
+          crossDomain: true,
+          type: 'GET',
+          dataType: 'json'
+        }
+      )
+
+      $.when(userInfo, challengesInfo, this).done(function (user, challenges, vm) {
+        var teamInfo = $.ajax(
+          {
+            url: apiroot + 'teams/' + user.team,
+            crossDomain: true,
+            type: 'GET',
+            dataType: 'json'
+          }
+        )
+
+        $.when(teamInfo, vm).done(function (team, vm) {
+          for (var i in challenges) {
+            var challenge = challenges[i]
+
+            if (challenge.category === Number(genreid)) {
+              var teamChallengeStatus = team.questions.filter(function (item, index) {
+                if (item.id === challenge.id) return true
+              })
+              var teamObtainedPointsOnAChallenge
+              if (teamChallengeStatus.length === 0) {
+                teamObtainedPointsOnAChallenge = 0
+              } else {
+                teamObtainedPointsOnAChallenge = teamChallengeStatus[0].points
+              }
+
+              var challengeProgress = Math.round((teamObtainedPointsOnAChallenge * 100.0 / challenge.points))
+
+              var isChallengeCompleted = false
+              if (teamObtainedPointsOnAChallenge === challenge.points) {
+                isChallengeCompleted = true
+              } else {
+                isChallengeCompleted = false
+              }
+
+              var categoryString = vm.categoryList.filter(function (item, index) {
+                if (item.id === genreid) return true
+              })
+
+              challengeInfoForRender.push(
+                {
+                  id: challenge.id,
+                  title: challenge.title,
+                  category: categoryString,
+                  score: challenge.points,
+                  progress: challengeProgress,
+                  isCompleted: isChallengeCompleted
+                }
+              )
+            }
+          }
+        })
+      })
+      this.challengeList = challengeInfoForRender
     }
   }
 }
@@ -135,5 +217,50 @@ div.cell
   border-bottom: 1px solid #eee;
   color: #fff;
   clear: both;
+}
+
+/*********************
+  CategiryNavigation
+*********************/
+
+.genrenavbar { background-color: #444; }
+
+ul.genrenav
+{
+    height: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+ul.genrenav li { float: left; }
+
+ul.genrenav li a
+{
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+ul.genrenav li a.v-link-active { border-bottom: 2px solid #3df; }
+ul.genrenav li a:hover { background-color: #555; }
+
+@media screen and (max-width:680px)
+{
+  ul.genrenav {position: relative;}
+  ul.genrenav li
+  {
+    float: none;
+    display: inline;
+  }
+  ul.genrenav li a
+  {
+    display: block;
+    text-align: left;
+  }
 }
 </style>
