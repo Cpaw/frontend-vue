@@ -34,7 +34,7 @@
 import Genrenav from './Genrenav.vue'
 export default {
   data: function () {
-    var challenges = [
+    var challengeList = [
       {
         id: 1,
         title: 'test',
@@ -43,7 +43,7 @@ export default {
         isCompleted: false
       }
     ]
-    return {challenges}
+    return {challengeList}
   },
   components: { Genrenav },
   watch: {
@@ -54,23 +54,78 @@ export default {
   },
   methods: {
     fetchData: function () {
-      console.log('OK')
-      this.challenges = [
+      var $ = require('jquery')
+      var apiroot = 'http://localhost/lepusapi/'
+      var genreid = this.$route.params.genre
+
+      var challengeInfoForRender = []
+
+      var userInfo = $.ajax(
         {
-          id: 1,
-          title: 'test',
-          category: this.$route.params.genre,
-          score: '150',
-          isCompleted: true
-        },
-        {
-          id: 2,
-          title: 'test2',
-          category: this.$route.params.genre,
-          score: '9999',
-          isCompleted: false
+          url: apiroot + '/users/',
+          crossDomain: true,
+          type: 'GET',
+          dataType: 'json'
         }
-      ]
+      )
+
+      var challengesInfo = $.ajax(
+        {
+          url: apiroot + '/questions/',
+          crossDomain: true,
+          type: 'GET',
+          dataType: 'json'
+        }
+      )
+
+      $.when(userInfo, challengesInfo).done(function (user, challenges) {
+        var teamInfo = $.ajax(
+          {
+            url: apiroot + '/teams/' + user.team,
+            crossDomain: true,
+            type: 'GET',
+            dataType: 'json'
+          }
+        )
+
+        $.when(teamInfo).done(function (team) {
+          for (var i in challenges) {
+            var challenge = challenges[i]
+            if (challenge.category === genreid) {
+              var teamChallengeStatus = team.questions.filter(function (item, index) {
+                if (item.id === challenge.id) return true
+              })
+              var teamObtainedPointsOnAChallenge
+              if (teamChallengeStatus === null) {
+                teamObtainedPointsOnAChallenge = 0
+              } else {
+                teamObtainedPointsOnAChallenge = teamChallengeStatus.points
+              }
+
+              var challengeProgress = Math.round((teamObtainedPointsOnAChallenge / challenge.points) * 100)
+
+              var isChallengeCompleted = false
+              if (teamObtainedPointsOnAChallenge === challenge.points) {
+                isChallengeCompleted = true
+              } else {
+                isChallengeCompleted = false
+              }
+
+              challengeInfoForRender.push(
+                {
+                  id: challenge.id,
+                  title: challenge.title,
+                  score: challenge.points,
+                  progress: challengeProgress,
+                  isCompleted: isChallengeCompleted
+                }
+              )
+            }
+          }
+        })
+      })
+
+      this.challengeList = challengeInfoForRender
     }
   }
 }
