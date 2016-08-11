@@ -12,24 +12,17 @@
                             <div class="cell width10">Score</div>
                             <div class="cell width15"></div>
                         </div>
-                        <div class="row inactive">
-                            <a v-link="{ path : '/question/1' }">
-                                <div class="cell width10 center leftcell">1</div>
-                                <div class="cell width50">Fitst Example Task</div>
-                                <div class="cell width15">Category</div>
-                                <div class="cell width10">100</div>
-                                <div class="cell width15 rightcell">Completed</div>
-                            </a>
-                        </div>
-                        <div class="row active">
-                            <a v-link="{ path : '/question/2' }">
-                                <div class="cell width10 center leftcell">2</div>
-                                <div class="cell width50">Sescond Challenge</div>
-                                <div class="cell width15">Category</div>
-                                <div class="cell width10">100</div>
-                                <div class="cell width15 rightcell"></div>
-                            </a>
-                        </div>
+                        <div v-for="item in challenges">
+                            <div class="row active">
+                                <a v-link="{ path : '/question/' + item.id }">
+                                    <div class="cell width10 center leftcell">{{ $index+1 }}</div>
+                                    <div class="cell width50">{{ item.title }}</div>
+                                    <div class="cell width15">{{ item.category }}</div>
+                                    <div class="cell width10">{{ item.score }}</div>
+                                    <div class="cell width15 rightcell">{{ item.status }}</div>
+                                </a>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -40,8 +33,17 @@
 <script>
 import Genrenav from './Genrenav.vue'
 export default {
-  data: {
-    challenges: null
+  data: function () {
+    var challenges = [
+      {
+        id: 1,
+        title: 'test',
+        category: 'web',
+        score: '100',
+        status: ''
+      }
+    ]
+    return {challenges}
   },
   components: { Genrenav },
   watch: {
@@ -53,6 +55,22 @@ export default {
   methods: {
     fetchData: function () {
       console.log('OK')
+      this.challenges = [
+        {
+          id: 1,
+          title: 'test',
+          category: this.$route.params.genre,
+          score: '150',
+          status: 'Completed'
+        },
+        {
+          id: 2,
+          title: 'test2',
+          category: this.$route.params.genre,
+          score: '9999',
+          status: ''
+        }
+      ]
     }
   }
 }
