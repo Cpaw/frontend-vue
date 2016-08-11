@@ -2,7 +2,13 @@
     <article>
         <div class="container">
             <div class="contents bg-field">
-                <genrenav></genrenav>
+                <div class="genrenavbar">
+                    <nav>
+                        <ul class="genrenav" v-for="item in categoryList">
+                            <li><a v-link="{ path : '/questions/' + item.id }">{{ item.name }}</a></li>
+                        </ul>
+                    </nav>
+                </div>
                 <div class="readable">
                     <div class="smallbox ">
                         <div class="rowHead">
@@ -10,7 +16,7 @@
                             <div class="cell width50">Title</div>
                             <div class="cell width15">Category</div>
                             <div class="cell width10">Score</div>
-                            <div class="cell width15"></div>
+                            <div class="cell width15">Progress</div>
                         </div>
                         <div v-for="item in challengeList">
                             <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
@@ -31,38 +37,61 @@
 </template>
 
 <script>
-import Genrenav from './Genrenav.vue'
+var $ = require('jquery')
+var apiroot = 'http://localhost/api/'
 export default {
   data: function () {
+    var categoryList = [
+      {
+        id: 0,
+        name: '',
+        ordering: 0,
+        created_at: '',
+        updated_at: ''
+      }
+    ]
     var challengeList = [
       {
-        id: 1,
-        title: 'test',
-        category: 1,
-        score: 100,
+        id: 0,
+        title: '',
+        category: '',
+        score: 0,
         progress: 0,
         isCompleted: false
       }
     ]
-    return {challengeList}
+    return {categoryList, challengeList}
   },
-  components: { Genrenav },
+  ready: function () {
+    this.getCategoryList()
+  },
   watch: {
     '$route.params.genre': function (val, oldVal) {
       this.fetchData()
     }
   },
   methods: {
+    getCategoryList: function () {
+      $.ajax(
+        {
+          url: apiroot + 'categories/',
+          crossDomain: true,
+          type: 'GET',
+          dataType: 'json',
+          success: function (json) {
+            this.categoryList = json
+          }
+        }
+      )
+    },
     fetchData: function () {
-      var $ = require('jquery')
-      var apiroot = 'http://localhost/lepusapi/'
       var genreid = this.$route.params.genre
 
       var challengeInfoForRender = []
 
       var userInfo = $.ajax(
         {
-          url: apiroot + '/users/',
+          url: apiroot + 'users/',
           crossDomain: true,
           type: 'GET',
           dataType: 'json'
@@ -71,7 +100,7 @@ export default {
 
       var challengesInfo = $.ajax(
         {
-          url: apiroot + '/questions/',
+          url: apiroot + 'questions/',
           crossDomain: true,
           type: 'GET',
           dataType: 'json'
@@ -81,7 +110,7 @@ export default {
       $.when(userInfo, challengesInfo).done(function (user, challenges) {
         var teamInfo = $.ajax(
           {
-            url: apiroot + '/teams/' + user.team,
+            url: apiroot + 'teams/' + user.team,
             crossDomain: true,
             type: 'GET',
             dataType: 'json'
@@ -111,10 +140,15 @@ export default {
                 isChallengeCompleted = false
               }
 
+              var categoryString = this.categoryList.filter(function (item, index) {
+                if (item.id === genreid) return true
+              })
+
               challengeInfoForRender.push(
                 {
                   id: challenge.id,
                   title: challenge.title,
+                  category: categoryString,
                   score: challenge.points,
                   progress: challengeProgress,
                   isCompleted: isChallengeCompleted
@@ -190,5 +224,50 @@ div.cell
   border-bottom: 1px solid #eee;
   color: #fff;
   clear: both;
+}
+
+/*********************
+  CategiryNavigation
+*********************/
+
+.genrenavbar { background-color: #444; }
+
+ul.genrenav
+{
+    height: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+ul.genrenav li { float: left; }
+
+ul.genrenav li a
+{
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+ul.genrenav li a.v-link-active { border-bottom: 2px solid #3df; }
+ul.genrenav li a:hover { background-color: #555; }
+
+@media screen and (max-width:680px)
+{
+  ul.genrenav {position: relative;}
+  ul.genrenav li
+  {
+    float: none;
+    display: inline;
+  }
+  ul.genrenav li a
+  {
+    display: block;
+    text-align: left;
+  }
 }
 </style>
