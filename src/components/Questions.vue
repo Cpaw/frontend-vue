@@ -4,8 +4,10 @@
       <div class="contents bg-field">
         <div class="genrenavbar">
           <nav>
-            <ul class="genrenav" v-for="item in categoryList">
-              <li><a v-link="{ path : '/questions/' + item.id }">{{ item.name }}</a></li>
+            <ul class="genrenav">
+              <li v-for="item in categoryList">
+                <a v-link="{ path : '/questions/' + item.id }">{{ item.name }}</a>
+              </li>
             </ul>
           </nav>
         </div>
