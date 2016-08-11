@@ -1,28 +1,28 @@
 <template>
     <article>
         <div class="container">
-            <div class="contents notice_container">
-                <nav>
-                    <ul class="menu">
-                        <li><a href="">Ranking</a></li>
-                        <li><a href="">Name</a></li>
-                        <li><a href="">Score</a></li>
-                    </ul>
-                </nav>
-                    <ul id="object">
-                    <li v-for="data in ranking">
-                        <div class="notice_internal">
+            <table class="contents notice_container">
+                <thead>
+                    <tr class="menu">
+                        <th>Ranking</a></li>
+                        <th>Name</a></li>
+                        <th>Score</a></li>
+                    </tr>
+                </thead>
+                <tbody id="object">
+                    <tr v-for="data in ranking">
+                        <td class="notice_internal">
                             {{ data.rank }}
-                        </div>
-                        <div class="notice_contents">
+                        </td>
+                        <td class="notice_contents">
                             {{ data.name }}
-                        </div>
-                        <div class="notice_footer">
+                        </td>
+                        <td class="notice_footer">
                             {{ data.score }}        
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </article>
 </template>
