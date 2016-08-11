@@ -13,13 +13,13 @@
                             <div class="cell width15"></div>
                         </div>
                         <div v-for="item in challenges">
-                            <div class="row active">
+                            <div class="row {{item.isCompleted ? 'inactive' : 'active'}}">
                                 <a v-link="{ path : '/question/' + item.id }">
                                     <div class="cell width10 center leftcell">{{ $index+1 }}</div>
                                     <div class="cell width50">{{ item.title }}</div>
                                     <div class="cell width15">{{ item.category }}</div>
                                     <div class="cell width10">{{ item.score }}</div>
-                                    <div class="cell width15 rightcell">{{ item.status }}</div>
+                                    <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : '' }}</div>
                                 </a>
                             </div>
                         </div>                        
@@ -40,7 +40,7 @@ export default {
         title: 'test',
         category: 'web',
         score: '100',
-        status: ''
+        isCompleted: false
       }
     ]
     return {challenges}
@@ -61,14 +61,14 @@ export default {
           title: 'test',
           category: this.$route.params.genre,
           score: '150',
-          status: 'Completed'
+          isCompleted: true
         },
         {
           id: 2,
           title: 'test2',
           category: this.$route.params.genre,
           score: '9999',
-          status: ''
+          isCompleted: false
         }
       ]
     }
