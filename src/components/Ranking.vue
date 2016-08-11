@@ -1,23 +1,23 @@
 <template>
     <article>
         <div class="container">
-            <table class="contents notice_container">
+            <table class="contents">
                 <thead>
-                    <tr class="menu">
-                        <th>Ranking</a></li>
-                        <th>Name</a></li>
-                        <th>Score</a></li>
+                    <tr>
+                        <th>Ranking</li>
+                        <th>Name</li>
+                        <th>Score</li>
                     </tr>
                 </thead>
                 <tbody id="object">
                     <tr v-for="data in ranking">
-                        <td class="notice_internal">
+                        <td class="col_rank">
                             {{ data.rank }}
                         </td>
-                        <td class="notice_contents">
+                        <td class="col_name">
                             {{ data.name }}
                         </td>
-                        <td class="notice_footer">
+                        <td class="col_score">
                             {{ data.score }}        
                         </td>
                     </tr>
@@ -62,21 +62,23 @@ export default {
 </script>
 
 <style scoped>
-.notice_internal {
-	margin: 30px 0;
-	width: 100%;
-	background-color: #ccc;
-	padding:1em 0;
+.col_rank {
+	color:white;
+	width: 20%;
 }
 
-.notice_container li {
-        list-style-type: none;
+.col_name {
 	color: white;
+	width: 50%;
 }
 
-.notice_footer {
-	padding:1em;
-	text-align: right;
+.col_score {
+	color: white;
+	width:30%;	
+}
+
+tr {
+   color: white;
 }
 
 ul {
