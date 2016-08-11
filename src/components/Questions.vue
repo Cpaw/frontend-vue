@@ -91,7 +91,7 @@ export default {
 
       var userInfo = $.ajax(
         {
-          url: apiroot + 'users/',
+          url: apiroot + 'auth/',
           crossDomain: true,
           type: 'GET',
           dataType: 'json'
@@ -107,7 +107,7 @@ export default {
         }
       )
 
-      $.when(userInfo, challengesInfo).done(function (user, challenges) {
+      $.when(userInfo, challengesInfo, this.categoryList).done(function (user, challenges, cList) {
         var teamInfo = $.ajax(
           {
             url: apiroot + 'teams/' + user.team,
@@ -117,21 +117,22 @@ export default {
           }
         )
 
-        $.when(teamInfo).done(function (team) {
+        $.when(teamInfo, cList).done(function (team, cList) {
           for (var i in challenges) {
             var challenge = challenges[i]
-            if (challenge.category === genreid) {
+
+            if (challenge.category === Number(genreid)) {
               var teamChallengeStatus = team.questions.filter(function (item, index) {
                 if (item.id === challenge.id) return true
               })
               var teamObtainedPointsOnAChallenge
-              if (teamChallengeStatus === null) {
+              if (teamChallengeStatus.length === 0) {
                 teamObtainedPointsOnAChallenge = 0
               } else {
-                teamObtainedPointsOnAChallenge = teamChallengeStatus.points
+                teamObtainedPointsOnAChallenge = teamChallengeStatus[0].points
               }
 
-              var challengeProgress = Math.round((teamObtainedPointsOnAChallenge / challenge.points) * 100)
+              var challengeProgress = Math.round((teamObtainedPointsOnAChallenge * 100.0 / challenge.points))
 
               var isChallengeCompleted = false
               if (teamObtainedPointsOnAChallenge === challenge.points) {
@@ -140,7 +141,7 @@ export default {
                 isChallengeCompleted = false
               }
 
-              var categoryString = this.categoryList.filter(function (item, index) {
+              var categoryString = cList.filter(function (item, index) {
                 if (item.id === genreid) return true
               })
 
