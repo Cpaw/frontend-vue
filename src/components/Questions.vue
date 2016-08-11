@@ -11,10 +11,10 @@
             </ul>
           </nav>
         </div>
+        <div class="message" v-if="hasMessage">
+          {{ message }} 
+        </div>
         <div class="readable">
-          <div v-show="hasMessage">
-            {{ message }}
-          </div>
           <div class="smallbox ">
             <div class="rowHead">
               <div class="cell width10 center">#</div>
@@ -229,6 +229,17 @@ div.cell
   border-bottom: 1px solid #eee;
   color: #fff;
   clear: both;
+}
+
+div.message {
+  height: 3em;
+  margin: 1em 0;
+  line-height: 2.5em;
+  text-align: center;
+  color: #eee;
+  background-color: rgba(256,96,96,0.5);
+  border: 1px solid #ff3333;
+  box-shadow: 0px 0px 10px #f33;
 }
 
 /*********************
