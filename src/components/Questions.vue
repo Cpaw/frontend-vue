@@ -40,7 +40,21 @@
 <script>
 import Genrenav from './Genrenav.vue'
 export default {
-  components: { Genrenav }
+  data: {
+    challenges: null
+  },
+  components: { Genrenav },
+  watch: {
+    '$route.params.genre': function (val, oldVal) {
+      console.log('new: %s, old: %s', val, oldVal)
+      this.fetchData()
+    }
+  },
+  methods: {
+    fetchData: function () {
+      console.log('OK')
+    }
+  }
 }
 </script>
 
