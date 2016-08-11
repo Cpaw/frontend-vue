@@ -12,14 +12,14 @@
                             <div class="cell width10">Score</div>
                             <div class="cell width15"></div>
                         </div>
-                        <div v-for="item in challenges">
+                        <div v-for="item in challengeList">
                             <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
                                 <a v-link="{ path : '/question/' + item.id }">
                                     <div class="cell width10 center leftcell">{{ $index + 1 }}</div>
                                     <div class="cell width50">{{ item.title }}</div>
                                     <div class="cell width15">{{ item.category }}</div>
                                     <div class="cell width10">{{ item.score }}</div>
-                                    <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : item.progress }}</div>
+                                    <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : item.progress + '%' }}</div>
                                 </a>
                             </div>
                         </div>                        
@@ -38,8 +38,9 @@ export default {
       {
         id: 1,
         title: 'test',
-        category: 'web',
-        score: '100',
+        category: 1,
+        score: 100,
+        progress: 0,
         isCompleted: false
       }
     ]
@@ -48,7 +49,6 @@ export default {
   components: { Genrenav },
   watch: {
     '$route.params.genre': function (val, oldVal) {
-      console.log('new: %s, old: %s', val, oldVal)
       this.fetchData()
     }
   },
