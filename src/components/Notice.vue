@@ -71,6 +71,7 @@ export default {
 
 .notice_container li {
         list-style-type: none;
+	color: white;
 }
 
 .notice_footer {
