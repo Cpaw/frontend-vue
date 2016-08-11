@@ -1,39 +1,39 @@
 <template>
-    <article>
-        <div class="container">
-            <div class="contents bg-field">
-                <div class="genrenavbar">
-                    <nav>
-                        <ul class="genrenav" v-for="item in categoryList">
-                            <li><a v-link="{ path : '/questions/' + item.id }">{{ item.name }}</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="readable">
-                    <div class="smallbox ">
-                        <div class="rowHead">
-                            <div class="cell width10 center">#</div>
-                            <div class="cell width50">Title</div>
-                            <div class="cell width15">Category</div>
-                            <div class="cell width10">Score</div>
-                            <div class="cell width15">Progress</div>
-                        </div>
-                        <div v-for="item in challengeList">
-                            <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
-                                <a v-link="{ path : '/question/' + item.id }">
-                                    <div class="cell width10 center leftcell">{{ $index + 1 }}</div>
-                                    <div class="cell width50">{{ item.title }}</div>
-                                    <div class="cell width15">{{ item.category }}</div>
-                                    <div class="cell width10">{{ item.score }}</div>
-                                    <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : item.progress + '%' }}</div>
-                                </a>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-            </div>
+  <article>
+    <div class="container">
+      <div class="contents bg-field">
+        <div class="genrenavbar">
+          <nav>
+            <ul class="genrenav" v-for="item in categoryList">
+              <li><a v-link="{ path : '/questions/' + item.id }">{{ item.name }}</a></li>
+            </ul>
+          </nav>
         </div>
-    </article>
+        <div class="readable">
+          <div class="smallbox ">
+            <div class="rowHead">
+              <div class="cell width10 center">#</div>
+              <div class="cell width50">Title</div>
+              <div class="cell width15">Category</div>
+              <div class="cell width10">Score</div>
+              <div class="cell width15">Progress</div>
+            </div>
+            <div v-for="item in challengeList">
+              <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
+                <a v-link="{ path : '/question/' + item.id }">
+                  <div class="cell width10 center leftcell">{{ $index + 1 }}</div>
+                  <div class="cell width50">{{ item.title }}</div>
+                  <div class="cell width15">{{ item.category }}</div>
+                  <div class="cell width10">{{ item.score }}</div>
+                  <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : item.progress + '%' }}</div>
+                </a>
+              </div>
+            </div>                        
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
 </template>
 
 <script>
@@ -158,7 +158,6 @@ export default {
           }
         })
       })
-
       this.challengeList = challengeInfoForRender
     }
   }
