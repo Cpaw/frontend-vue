@@ -9,19 +9,23 @@
                         <li><a href="">Bug</a></li>
                     </ul>
                 </nav>
-                    <ul id="object">
-                    <li v-for="notice in notices">
-                        <div class="notice_internal">
-                            {{ notice.title }}
-                        </div>
-                        <div class="notice_contents">
-                            {{ notice.messages }}
-                        </div>
-                        <div class="notice_footer">
-                            {{ notice.date }}        
-                        </div>
-                    </li>
-                </ul>
+                <div class="readable">
+                    <div class="smallbox">
+                        <ul id="object">
+                            <li class="notice_instance" v-for="notice in notices">
+                                <div class="notice_title">
+                                    {{ notice.title }}
+                                </div>
+                                <div class="notice_body">
+                                    {{ notice.messages }}
+                                </div>
+                                <div class="notice_footer">
+                                    {{ notice.date }}        
+                                </div>
+                            </li>
+                        </ul>
+                   </div>
+                </div>
             </div>
         </div>
     </article>
@@ -62,19 +66,25 @@ export default {
 </script>
 
 <style scoped>
-.notice_internal {
-	margin: 30px 0;
-	width: 100%;
-	background-color: #ccc;
-	padding:1em 0;
+.notice_container li {
+    list-style-type: none;
 }
 
-.notice_container li {
-        list-style-type: none;
+.notice_instance{
+    margin: 1em 0;
+}
+
+.notice_title {
+	padding: 0 1em;
+    border-bottom: 1px solid #33ddff;
+}
+
+.notice_body {
+	padding: 0.5em 1em;  
 }
 
 .notice_footer {
-	padding:1em;
+	padding: 0 1em;
 	text-align: right;
 }
 
