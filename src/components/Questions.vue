@@ -160,6 +160,8 @@ export default {
               )
             }
           }
+        }).fail(function (jqxhr, status, error) {
+          this.message = status
         })
       }).fail(function (jqxhr, status, error) {
         this.message = status
