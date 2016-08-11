@@ -49,7 +49,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: 'http://localhost:3000/notice',
+        url: 'http://localhost:3000/posts',
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
