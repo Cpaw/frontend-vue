@@ -12,6 +12,9 @@
           </nav>
         </div>
         <div class="readable">
+          <div v-show="hasMessage">
+            {{ message }}
+          </div>
           <div class="smallbox ">
             <div class="rowHead">
               <div class="cell width10 center">#</div>
@@ -30,7 +33,7 @@
                   <div class="cell width15 rightcell">{{ item.isCompleted ? 'completed' : item.progress + '%' }}</div>
                 </a>
               </div>
-            </div>                        
+            </div>
           </div>
         </div>
       </div>
@@ -43,17 +46,24 @@ var $ = require('jquery')
 var apiroot = 'http://localhost/api/'
 export default {
   data: function () {
-    var categoryList = [
-      {
-        id: 0,
-        name: 'null',
-        ordering: 0,
-        created_at: '',
-        updated_at: ''
-      }
-    ]
-    var challengeList = []
-    return {categoryList, challengeList}
+    return {
+      categoryList: [
+        {
+          id: 0,
+          name: 'null',
+          ordering: 0,
+          created_at: '',
+          updated_at: ''
+        }
+      ],
+      challengeList: [],
+      message: ''
+    }
+  },
+  computed: {
+    hasMessage: function () {
+      return this.message !== ''
+    }
   },
   ready: function () {
     this.getCategoryList()
@@ -151,6 +161,8 @@ export default {
             }
           }
         })
+      }).fail(function (jqxhr, status, error) {
+        this.message = status
       })
       this.challengeList = challengeInfoForRender
     }
