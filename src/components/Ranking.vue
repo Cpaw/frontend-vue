@@ -65,16 +65,23 @@ export default {
 .col_rank {
 	color:white;
 	width: 20%;
+	text-align: center;
 }
 
 .col_name {
 	color: white;
 	width: 50%;
+	text-align: center;
 }
 
 .col_score {
 	color: white;
 	width:30%;	
+	text-align: center;
+}
+
+table {
+      width:100%;
 }
 
 tr {
