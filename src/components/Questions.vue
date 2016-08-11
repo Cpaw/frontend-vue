@@ -13,9 +13,9 @@
                             <div class="cell width15"></div>
                         </div>
                         <div v-for="item in challenges">
-                            <div class="row {{item.isCompleted ? 'inactive' : 'active'}}">
+                            <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
                                 <a v-link="{ path : '/question/' + item.id }">
-                                    <div class="cell width10 center leftcell">{{ $index+1 }}</div>
+                                    <div class="cell width10 center leftcell">{{ $index + 1 }}</div>
                                     <div class="cell width50">{{ item.title }}</div>
                                     <div class="cell width15">{{ item.category }}</div>
                                     <div class="cell width10">{{ item.score }}</div>
