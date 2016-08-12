@@ -3,23 +3,24 @@
         <div class="container">
             <div class="contents notice_container">
                 <nav>
+		<h1>bbb{{ vm.state }}aaaa</h1>
                     <ul class="menu">
-                        <li><a href="">Notice</a></li>
-                        <li><a href="">Update</a></li>
-                        <li><a href="">Bug</a></li>
+                        <li id="notice_button"><a v-on:click="NoticeButton">Notice</a></li>
+                        <li id="update_button"><a v-on:click="UpdateButton">Update</a></li>
+                        <li id="bug_button"><a v-on:click="BugButton">Bug</a></li>
                     </ul>
                 </nav>
                 <div class="readable">
                     <div class="smallbox">
                         <ul id="object">
                             <li class="notice_instance" v-for="notice in notices">
-                                <div v-if="notice.pr=='notice'" class="notice_title">
+                                <div v-if="notice.pr=='{{ vm.state }}'" class="notice_title">
                                     {{ notice.title }}
                                 </div>
-                                <div v-if="notice.pr=='notice'"class="notice_body">
+                                <div v-if="notice.pr=={{ vm.state }}"class="notice_body">
                                     {{ notice.messages }}
                                 </div>
-                                <div v-if="notice.pr=='notice'"class="notice_footer">
+                                <div v-if="notice.pr=={{ mv.state }}"class="notice_footer">
                                     {{ notice.date }}        
                                 </div>
                             </li>
@@ -32,7 +33,25 @@
 </template>
 
 <script>
+import Vue from 'vue'
 var $ = require('jquery')
+var vm = new Vue({
+  el: '.notice_instance',
+  data: {
+    state: 'notice'
+  },
+  methods: {
+    NoticeButton: function (event) {
+      this.state = 'notice'
+    },
+    UpdateButton: function (event) {
+      this.state = 'update'
+    },
+    BugButton: function (event) {
+      this.state = 'bug'
+    }
+  }
+})
 export default {
   data () {
     var notices = [
@@ -43,7 +62,10 @@ export default {
         date: ''
       }
     ]
-    return {notices}
+    return {
+      notices,
+      vm
+    }
   },
   ready: function () {
     this.getJson()
