@@ -5,7 +5,7 @@
         <ul class="topnav" id="toggleNav">
           <li v-link-active><a v-link="{ path : '/home' }">Home</a></li>
           <li v-link-active><a v-link="{ path : '/about' }">About</a></li>
-          <li><a v-link="{ path : '/questions' }">Questions</a></li>
+          <li><a v-link="{ path : '/challenges' }">Challenges</a></li>
           <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
           <li><a v-link="{ path : '/notice' }">Notice</a></li>
           <li class="rightalign"><a v-link="{ path : '/signup' }">Sign up</a></li>
@@ -92,7 +92,7 @@ ul.topnav li.icon
     display: none;
 }
 
-@media screen and (max-width:750px) 
+@media screen and (max-width:780px) 
 {
   ul.topnav li:not(:first-child){display: none;}
   ul.topnav li.icon {

@@ -5,8 +5,11 @@
         <div class="genrenavbar">
           <nav>
             <ul class="genrenav">
-              <li v-for="item in categoryList">
-                <a v-link="{ path : '/questions/' + item.id }">{{ item.name }}</a>
+              <li>
+                <a v-bind:class="{ 'activeTab': isActiveTab(undefined) }" v-link="{ path : '/challenges'}">ALL</a>
+              </li>
+              <li v-for="item in categoryList" >
+                <a v-bind:class="{ 'activeTab': isActiveTab(item.name) }" v-link="{ path : '/challenges/' + item.name }">{{ item.name }}</a>
               </li>
             </ul>
           </nav>
@@ -47,15 +50,7 @@ var apiroot = 'http://localhost/api/'
 export default {
   data: function () {
     return {
-      categoryList: [
-        {
-          id: 0,
-          name: 'null',
-          ordering: 0,
-          created_at: '',
-          updated_at: ''
-        }
-      ],
+      categoryList: [],
       challengeList: [],
       message: ''
     }
@@ -67,6 +62,7 @@ export default {
   },
   ready: function () {
     this.getCategoryList()
+    this.fetchData()
   },
   watch: {
     '$route.params.genre': function (val, oldVal) {
@@ -87,10 +83,25 @@ export default {
         }
       )
     },
-    fetchData: function () {
-      var genreid = this.$route.params.genre
 
+    lookupCatFromName: function (catList, catName) {
+      var cat = catList.filter(function (item, index) {
+        if (item.name === catName) return true
+      })
+      if (cat.length !== 0) return cat[0].id
+      else return null
+    },
+    isActiveTab: function (str) {
+      return str === this.$route.params.genre
+    },
+    fetchData: function () {
       var challengeInfoForRender = []
+      var genreName = this.$route.params.genre
+      var genreid = this.lookupCatFromName(this.categoryList, genreName)
+
+      if (genreName !== undefined && genreid === null) {
+        this.$route.router.go('/questions')
+      }
 
       var userInfo = $.ajax(
         {
@@ -124,29 +135,24 @@ export default {
           for (var i in challenges) {
             var challenge = challenges[i]
 
-            if (challenge.category === Number(genreid)) {
-              var teamChallengeStatus = team.questions.filter(function (item, index) {
-                if (item.id === challenge.id) return true
-              })
-              var teamObtainedPointsOnAChallenge
-              if (teamChallengeStatus.length === 0) {
-                teamObtainedPointsOnAChallenge = 0
-              } else {
-                teamObtainedPointsOnAChallenge = teamChallengeStatus[0].points
-              }
+            if (genreName === undefined ||
+                challenge.category === Number(genreid)) {
+              var teamChallengeStatus = genreName !== undefined
+                ? team.questions.filter(function (item, index) {
+                  if (item.id === challenge.id) return true
+                })
+                : team.questions
+
+              var teamObtainedPointsOnAChallenge = teamChallengeStatus.length === 0
+              ? 0 : teamChallengeStatus[0].points
 
               var challengeProgress = Math.round((teamObtainedPointsOnAChallenge * 100.0 / challenge.points))
 
-              var isChallengeCompleted = false
-              if (teamObtainedPointsOnAChallenge === challenge.points) {
-                isChallengeCompleted = true
-              } else {
-                isChallengeCompleted = false
-              }
+              var isChallengeCompleted = (teamObtainedPointsOnAChallenge === challenge.points)
 
               var categoryString = vm.categoryList.filter(function (item, index) {
-                if (item.id === genreid) return true
-              })
+                if (item.id === challenge.category) return true
+              })[0].name
 
               challengeInfoForRender.push(
                 {
@@ -271,10 +277,10 @@ ul.genrenav li a
     font-size: 17px;
 }
 
-ul.genrenav li a.v-link-active { border-bottom: 2px solid #3df; }
+ul.genrenav li a.activeTab { border-bottom: 2px solid #3df; }
 ul.genrenav li a:hover { background-color: #555; }
 
-@media screen and (max-width:680px)
+@media screen and (max-width:700px)
 {
   ul.genrenav {position: relative;}
   ul.genrenav li
