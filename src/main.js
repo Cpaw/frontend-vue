@@ -23,8 +23,13 @@ router.map({
   '/about': {
     component: About
   },
-  '/questions/:genre': {
-    component: Questions
+  '/challenges': {
+    component: Questions,
+    subRoutes: {
+      '/:genre': {
+        component: Questions
+      }
+    }
   },
   '/ranking': {
     component: Ranking
@@ -35,8 +40,6 @@ router.map({
 })
 
 router.redirect({
-  '/questions': '/questions/web',
-
   // 見つからなかったルートは /home にリダイレクト
   '*': '/home'
 })
