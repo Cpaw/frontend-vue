@@ -13,13 +13,13 @@
                     <div class="smallbox">
                         <ul id="object">
                             <li class="notice_instance" v-for="notice in notices">
-                                <div class="notice_title">
+                                <div v-if="notice.pr=='notice'" class="notice_title">
                                     {{ notice.title }}
                                 </div>
-                                <div class="notice_body">
+                                <div v-if="notice.pr=='notice'"class="notice_body">
                                     {{ notice.messages }}
                                 </div>
-                                <div class="notice_footer">
+                                <div v-if="notice.pr=='notice'"class="notice_footer">
                                     {{ notice.date }}        
                                 </div>
                             </li>
@@ -37,6 +37,7 @@ export default {
   data () {
     var notices = [
       {
+        pr: '',
         title: '',
         messages: '',
         date: ''
@@ -53,7 +54,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: 'http://localhost:3000/posts',
+        url: 'http://localhost:3000/notice',
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
