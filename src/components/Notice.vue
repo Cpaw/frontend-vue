@@ -5,15 +5,14 @@
                 <nav>
 
                     <ul class="menu">
-                        <li id="notice_button"><a>Notice</a></li>
-                        <li id="update_button"><a>Update</a></li>
-                        <li id="bug_button"><a>Bug</a></li>
+                        <li id="notice_button" v-on:click='vm.NoticeButton'><a>Notice</a></li>
+                        <li id="update_button" v-on:click='vm.UpdateButton'><a>Update</a></li>
+                        <li id="bug_button" v-on:click='vm.BugButton'><a>Bug</a></li>
                     </ul>
                 </nav>
                 <div class="readable">
                     <div class="smallbox">
                         <ul id="object">
-			    <h1>{{ vm.state }}</h1>
                             <li class="notice_instance" v-for="notice in notices">
                                 <div v-if="notice.pr == vm.state" class="notice_title">
                                     {{ notice.title }}
@@ -41,13 +40,13 @@ var vm = new Vue({
     state: 'notice'
   },
   methods: {
-    NoticeButton: function () {
+    NoticeButton: function (event) {
       this.state = 'notice'
     },
-    UpdateButton: function () {
+    UpdateButton: function (event) {
       this.state = 'update'
     },
-    BugButton: function () {
+    BugButton: function (event) {
       this.state = 'bug'
     }
   }
