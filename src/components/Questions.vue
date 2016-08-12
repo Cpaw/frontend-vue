@@ -26,7 +26,7 @@
               <div class="cell width10">Score</div>
               <div class="cell width15">Progress</div>
             </div>
-            <div v-for="item in challengeList">
+            <div v-for="item in challengeListForRender">
               <div class="row {{ item.isCompleted ? 'inactive' : 'active' }}">
                 <a v-link="{ path : '/question/' + item.id }">
                   <div class="cell width10 center leftcell">{{ $index + 1 }}</div>
@@ -50,36 +50,52 @@ var apiroot = 'http://localhost/api/'
 export default {
   data: function () {
     return {
+      userInfo: null,
       categoryList: [],
       challengeList: [],
+      challengeListForRender: [],
       message: ''
     }
   },
+
   computed: {
     hasMessage: function () {
       return this.message !== ''
     }
   },
+
   ready: function () {
-    this.getCategoryList()
-    this.fetchData()
+    $.when(this.getFromAPI('auth/'),
+           this.getFromAPI('categories/'),
+           this.getFromAPI('questions/'), this)
+    .done(function (uinfo, clist, qList, vm) {
+      vm.userInfo = uinfo
+      vm.categoryList = clist
+      vm.challengeList = qList
+      vm.challengeListForRender = vm.filterList(vm.$route.params.genre)
+    }).fail(function (jqxhr, status, error) {
+      this.message = status
+    })
   },
+
   watch: {
     '$route.params.genre': function (val, oldVal) {
-      this.fetchData()
+      var genreid = this.lookupCatFromName(this.categoryList, val)
+      if (val !== undefined && genreid === null) {
+        this.$route.router.go('/questions')
+      }
+      this.challengeListForRender = this.filterList(val)
     }
   },
+
   methods: {
-    getCategoryList: function () {
-      $.ajax(
+    getFromAPI: function (endpoint) {
+      return $.ajax(
         {
-          url: apiroot + 'categories/',
+          url: apiroot + endpoint,
           crossDomain: true,
           type: 'GET',
-          dataType: 'json',
-          success: function (json) {
-            this.categoryList = json
-          }
+          dataType: 'json'
         }
       )
     },
@@ -91,88 +107,49 @@ export default {
       if (cat.length !== 0) return cat[0].id
       else return null
     },
+
     isActiveTab: function (str) {
       return str === this.$route.params.genre
     },
-    fetchData: function () {
-      var challengeInfoForRender = []
+
+    filterList: function (cat) {
+      var resultList = []
       var genreName = this.$route.params.genre
       var genreid = this.lookupCatFromName(this.categoryList, genreName)
-
-      if (genreName !== undefined && genreid === null) {
-        this.$route.router.go('/questions')
-      }
-
-      var userInfo = $.ajax(
-        {
-          url: apiroot + 'auth/',
-          crossDomain: true,
-          type: 'GET',
-          dataType: 'json'
-        }
-      )
-
-      var challengesInfo = $.ajax(
-        {
-          url: apiroot + 'questions/',
-          crossDomain: true,
-          type: 'GET',
-          dataType: 'json'
-        }
-      )
-
-      $.when(userInfo, challengesInfo, this).done(function (user, challenges, vm) {
-        var teamInfo = $.ajax(
-          {
-            url: apiroot + 'teams/' + user.team,
-            crossDomain: true,
-            type: 'GET',
-            dataType: 'json'
+      var challenges = this.challengeList
+      $.when(this.getFromAPI('teams/' + this.userInfo.team), this)
+      .done(function (team, vm) {
+        for (var i in challenges) {
+          var challenge = challenges[i]
+          if (genreName === undefined ||
+              challenge.category === Number(genreid)) {
+            var teamChallengeStatus = team.questions.filter(function (item, index) {
+              if (item.id === challenge.id) return true
+            })
+            var teamObtainedPointsOnAChallenge = teamChallengeStatus.length === 0
+            ? 0 : teamChallengeStatus[0].points
+            var challengeProgress =
+              Math.round((teamObtainedPointsOnAChallenge * 100.0 / challenge.points))
+            var isChallengeCompleted = (teamObtainedPointsOnAChallenge === challenge.points)
+            var categoryString = vm.categoryList.filter(function (item, index) {
+              if (item.id === challenge.category) return true
+            })[0].name
+            resultList.push(
+              {
+                id: challenge.id,
+                title: challenge.title,
+                category: categoryString,
+                score: challenge.points,
+                progress: challengeProgress,
+                isCompleted: isChallengeCompleted
+              }
+            )
           }
-        )
-
-        $.when(teamInfo, vm).done(function (team, vm) {
-          for (var i in challenges) {
-            var challenge = challenges[i]
-
-            if (genreName === undefined ||
-                challenge.category === Number(genreid)) {
-              var teamChallengeStatus = genreName !== undefined
-                ? team.questions.filter(function (item, index) {
-                  if (item.id === challenge.id) return true
-                })
-                : team.questions
-
-              var teamObtainedPointsOnAChallenge = teamChallengeStatus.length === 0
-              ? 0 : teamChallengeStatus[0].points
-
-              var challengeProgress = Math.round((teamObtainedPointsOnAChallenge * 100.0 / challenge.points))
-
-              var isChallengeCompleted = (teamObtainedPointsOnAChallenge === challenge.points)
-
-              var categoryString = vm.categoryList.filter(function (item, index) {
-                if (item.id === challenge.category) return true
-              })[0].name
-
-              challengeInfoForRender.push(
-                {
-                  id: challenge.id,
-                  title: challenge.title,
-                  category: categoryString,
-                  score: challenge.points,
-                  progress: challengeProgress,
-                  isCompleted: isChallengeCompleted
-                }
-              )
-            }
-          }
-        }).fail(function (jqxhr, status, error) {
-          this.message = status
-        })
+        }
       }).fail(function (jqxhr, status, error) {
         this.message = status
       })
-      this.challengeList = challengeInfoForRender
+      return resultList
     }
   }
 }
