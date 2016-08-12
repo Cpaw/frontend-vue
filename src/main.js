@@ -26,7 +26,7 @@ router.map({
   '/challenges': {
     component: Questions,
     subRoutes: {
-      '/:genre': {
+      '/:category': {
         component: Questions
       }
     }
