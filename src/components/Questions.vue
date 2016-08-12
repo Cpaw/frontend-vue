@@ -2,9 +2,9 @@
   <article>
     <div class="container">
       <div class="contents bg-field">
-        <div class="genrenavbar">
+        <div class="categorynavbar">
           <nav>
-            <ul class="genrenav">
+            <ul class="categorynav">
               <li>
                 <a v-bind:class="{ 'activeTab': isActiveTab(undefined) }" v-link="{ path : '/challenges'}">ALL</a>
               </li>
@@ -72,16 +72,16 @@ export default {
       vm.userInfo = uinfo
       vm.categoryList = clist
       vm.challengeList = qList
-      vm.challengeListForRender = vm.filterList(vm.$route.params.genre)
+      vm.challengeListForRender = vm.filterList(vm.$route.params.category)
     }).fail(function (jqxhr, status, error) {
       this.message = status
     })
   },
 
   watch: {
-    '$route.params.genre': function (val, oldVal) {
-      var genreid = this.lookupCatFromName(this.categoryList, val)
-      if (val !== undefined && genreid === null) {
+    '$route.params.category': function (val, oldVal) {
+      var categoryid = this.lookupCatFromName(this.categoryList, val)
+      if (val !== undefined && categoryid === null) {
         this.$route.router.go('/questions')
       }
       this.challengeListForRender = this.filterList(val)
@@ -109,20 +109,20 @@ export default {
     },
 
     isActiveTab: function (str) {
-      return str === this.$route.params.genre
+      return str === this.$route.params.category
     },
 
     filterList: function (cat) {
       var resultList = []
-      var genreName = this.$route.params.genre
-      var genreid = this.lookupCatFromName(this.categoryList, genreName)
+      var categoryName = this.$route.params.category
+      var categoryid = this.lookupCatFromName(this.categoryList, categoryName)
       var challenges = this.challengeList
       $.when(this.getFromAPI('teams/' + this.userInfo.team), this)
       .done(function (team, vm) {
         for (var i in challenges) {
           var challenge = challenges[i]
-          if (genreName === undefined ||
-              challenge.category === Number(genreid)) {
+          if (categoryName === undefined ||
+              challenge.category === Number(categoryid)) {
             var teamChallengeStatus = team.questions.filter(function (item, index) {
               if (item.id === challenge.id) return true
             })
@@ -231,9 +231,9 @@ div.message {
   CategiryNavigation
 *********************/
 
-.genrenavbar { background-color: #444; }
+.categorynavbar { background-color: #444; }
 
-ul.genrenav
+ul.categorynav
 {
     height: 100%;
     list-style-type: none;
@@ -242,9 +242,9 @@ ul.genrenav
     overflow: hidden;
 }
 
-ul.genrenav li { float: left; }
+ul.categorynav li { float: left; }
 
-ul.genrenav li a
+ul.categorynav li a
 {
     display: inline-block;
     color: #f2f2f2;
@@ -254,18 +254,18 @@ ul.genrenav li a
     font-size: 17px;
 }
 
-ul.genrenav li a.activeTab { border-bottom: 2px solid #3df; }
-ul.genrenav li a:hover { background-color: #555; }
+ul.categorynav li a.activeTab { border-bottom: 2px solid #3df; }
+ul.categorynav li a:hover { background-color: #555; }
 
 @media screen and (max-width:700px)
 {
-  ul.genrenav {position: relative;}
-  ul.genrenav li
+  ul.categorynav {position: relative;}
+  ul.categorynav li
   {
     float: none;
     display: inline;
   }
-  ul.genrenav li a
+  ul.categorynav li a
   {
     display: block;
     text-align: left;
