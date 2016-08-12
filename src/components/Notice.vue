@@ -3,24 +3,25 @@
         <div class="container">
             <div class="contents notice_container">
                 <nav>
-		<h1>bbb{{ vm.state }}aaaa</h1>
+
                     <ul class="menu">
-                        <li id="notice_button"><a v-on:click="NoticeButton">Notice</a></li>
-                        <li id="update_button"><a v-on:click="UpdateButton">Update</a></li>
-                        <li id="bug_button"><a v-on:click="BugButton">Bug</a></li>
+                        <li id="notice_button"><a>Notice</a></li>
+                        <li id="update_button"><a>Update</a></li>
+                        <li id="bug_button"><a>Bug</a></li>
                     </ul>
                 </nav>
                 <div class="readable">
                     <div class="smallbox">
                         <ul id="object">
+			    <h1>{{ vm.state }}</h1>
                             <li class="notice_instance" v-for="notice in notices">
-                                <div v-if="notice.pr=='{{ vm.state }}'" class="notice_title">
+                                <div v-if="notice.pr == vm.state" class="notice_title">
                                     {{ notice.title }}
                                 </div>
-                                <div v-if="notice.pr=={{ vm.state }}"class="notice_body">
+                                <div v-if="notice.pr == vm.state" class="notice_body">
                                     {{ notice.messages }}
                                 </div>
-                                <div v-if="notice.pr=={{ mv.state }}"class="notice_footer">
+                                <div v-if="notice.pr == vm.state" class="notice_footer">
                                     {{ notice.date }}        
                                 </div>
                             </li>
@@ -36,18 +37,17 @@
 import Vue from 'vue'
 var $ = require('jquery')
 var vm = new Vue({
-  el: '.notice_instance',
   data: {
     state: 'notice'
   },
   methods: {
-    NoticeButton: function (event) {
+    NoticeButton: function () {
       this.state = 'notice'
     },
-    UpdateButton: function (event) {
+    UpdateButton: function () {
       this.state = 'update'
     },
-    BugButton: function (event) {
+    BugButton: function () {
       this.state = 'bug'
     }
   }
