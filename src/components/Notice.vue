@@ -3,23 +3,24 @@
         <div class="container">
             <div class="contents notice_container">
                 <nav>
+
                     <ul class="menu">
-                        <li><a href="">Notice</a></li>
-                        <li><a href="">Update</a></li>
-                        <li><a href="">Bug</a></li>
+                        <li id="notice_button" v-on:click='vm.NoticeButton'><a>Notice</a></li>
+                        <li id="update_button" v-on:click='vm.UpdateButton'><a>Update</a></li>
+                        <li id="bug_button" v-on:click='vm.BugButton'><a>Bug</a></li>
                     </ul>
                 </nav>
                 <div class="readable">
                     <div class="smallbox">
                         <ul id="object">
                             <li class="notice_instance" v-for="notice in notices">
-                                <div class="notice_title">
+                                <div v-if="notice.pr == vm.state" class="notice_title">
                                     {{ notice.title }}
                                 </div>
-                                <div class="notice_body">
+                                <div v-if="notice.pr == vm.state" class="notice_body">
                                     {{ notice.messages }}
                                 </div>
-                                <div class="notice_footer">
+                                <div v-if="notice.pr == vm.state" class="notice_footer">
                                     {{ notice.date }}        
                                 </div>
                             </li>
@@ -32,17 +33,38 @@
 </template>
 
 <script>
+import Vue from 'vue'
 var $ = require('jquery')
+var vm = new Vue({
+  data: {
+    state: 'notice'
+  },
+  methods: {
+    NoticeButton: function (event) {
+      this.state = 'notice'
+    },
+    UpdateButton: function (event) {
+      this.state = 'update'
+    },
+    BugButton: function (event) {
+      this.state = 'bug'
+    }
+  }
+})
 export default {
   data () {
     var notices = [
       {
+        pr: '',
         title: '',
         messages: '',
         date: ''
       }
     ]
-    return {notices}
+    return {
+      notices,
+      vm
+    }
   },
   ready: function () {
     this.getJson()
@@ -53,7 +75,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: 'http://localhost:3000/posts',
+        url: 'http://localhost:3000/notice',
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
