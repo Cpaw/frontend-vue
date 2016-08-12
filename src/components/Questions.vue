@@ -228,7 +228,7 @@ div.message {
 }
 
 /*********************
-  CategiryNavigation
+  CategoryNavigation
 *********************/
 
 .categorynavbar { background-color: #444; }
