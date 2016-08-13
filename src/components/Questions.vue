@@ -72,6 +72,11 @@ export default {
       vm.userInfo = uinfo
       vm.categoryList = clist
       vm.challengeList = qList
+      var cat = this.$route.params.category
+      var categoryid = this.lookupCatFromName(clist, cat)
+      if (cat !== undefined && categoryid === null) {
+        this.$route.router.go('/challenges')
+      }
       vm.challengeListForRender = vm.filterList(vm.$route.params.category)
     }).fail(function (jqxhr, status, error) {
       this.message = status
@@ -82,7 +87,7 @@ export default {
     '$route.params.category': function (val, oldVal) {
       var categoryid = this.lookupCatFromName(this.categoryList, val)
       if (val !== undefined && categoryid === null) {
-        this.$route.router.go('/questions')
+        this.$route.router.go('/challenges')
       }
       this.challengeListForRender = this.filterList(val)
     }
@@ -114,7 +119,7 @@ export default {
 
     filterList: function (cat) {
       var resultList = []
-      var categoryName = this.$route.params.category
+      var categoryName = cat
       var categoryid = this.lookupCatFromName(this.categoryList, categoryName)
       var challenges = this.challengeList
       $.when(this.getFromAPI('teams/' + this.userInfo.team), this)
