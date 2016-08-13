@@ -79,7 +79,7 @@ export default {
       var cat = vm.$route.params.category
       var categoryid = vm.lookupCatFromName(clist[0], cat)
       if (cat !== undefined && categoryid === null) {
-        this.$route.router.go('/challenges')
+        vm.$route.router.go('/challenges')
       }
       vm.challengeListForRender = vm.filterList(vm.$route.params.category)
     }).fail(function (jqxhr, status, error) {
