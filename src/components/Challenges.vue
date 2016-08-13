@@ -272,7 +272,7 @@ ul.categorynav li a.activeTab {
 }
 
 ul.categorynav li a:hover {
-  background-color: rgba(32,64,128,0.5);
+  background-color: rgba(32,64,128,0.3);
   color: #fff;
 }
 
