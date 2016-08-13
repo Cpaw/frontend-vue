@@ -2,17 +2,13 @@
   <article>
     <div class="container">
       <div class="contents">
-        <h1>Cpaw CTF</h1>
+        <img class="toplogo" src="/static/img/toplogo.png">
         <div class="readable">
           <div class="smallbox">
-            <h2>Welcome to CpawCTF</h2>
+            <h2>Welcome</h2>
             <p>
-              CTFは初めてですか？一度こちらを参考にしてください！<br>
-              <strong>スコアサーバへの攻撃はおやめください</strong><br>
+              CTFは初めてですか？一度Aboutをお読みください！<br>
               お問い合わせは，twitterアカウント@porisuteruまたは@nomukenへリプライなどを飛ばしてください．
-            </p>
-            <p>
-              CpawCTFにおけるすべてのflagは，次の形式です : Cpaw{example}
             </p>
           </div>
         </div>
@@ -22,9 +18,9 @@
 </template>
 
 <style scoped>
-h1
-{
-  text-align: center;
-  color: #fff;
+img.toplogo {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
 }
 </style>

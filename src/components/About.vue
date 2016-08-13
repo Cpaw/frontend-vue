@@ -5,25 +5,34 @@
 				<div class="readable">
 					<div class="smallbox">
 						<section>
-							<h1>CTFとは</h1>
-							<p>
-								CTFとは、Capture the flagと呼ばれるセキュリティコンテストの一つで、コンピュータに関する技術や知識を競うコンテストです。<br>
-								flag(フラグ)と呼ばれる文字列を問題文から導き出し、提出することで得点を稼いで行き、合計得点で順位を競います。<br>
-								世界中でオンラインCTFやオンサイトCTFが開かれており、日程は<a href="https://ctftime.org/"> ctftime</a>		いうサイトがまとめているので、参考にしてください。<br>
-							</p>
-						</section>
-
-						<section>
 							<h1>ルール</h1>
 							<p>CpawCTFの問題に挑戦する際は、以下のルールに従ってください。</p>
 							<ul>
-								<li>設置されている各問題からflagの文字列を探し、flagを問題ページにあるフォームに入力してsubmitすれば経験値が入ります。</li>
-								<li>経験値が100%たまると、プレイヤーレベルが上がり次のステージが現れます。</li>
-								<li>経験値を貯めて、全問題完答を目指し頑張って下さい！</li>
-								<li>スコアサーバーは絶対に攻撃しないでください。悪質な攻撃をしているlogを確認次第、アカウント削除やアクセス拒否などそれ相応の処置		をします。</li>
-								<li>このCTFは常に開催されています。なので、答えを見たくないのに検索したら見れてしまったなどの事故を防ぐためインターネット上に解き		方を公開するのは止めましょう！</li>
-								<li>このサーバーにはWriteupを投稿する機能があります。解き終わったらWriteupを書いて他の人の解き方と比較して楽しみましょう！</li>
+								<li>設置されている各問題からflagを探し、問題ページにあるフォームから送信すると問題に応じた得点が入ります。</li>
+								<li>CpawCTFにおけるすべてのflagは，次の形式です : Cpaw{example}</li>
+								<li>獲得した得点の合計に応じて，より高難易度・高得点の問題が解禁されます．全問題完答を目指して頑張って下さい！</li>
+								<li>問題用に用意された環境以外は絶対に攻撃しないでください。悪質な攻撃を確認した場合、当該アカウントの凍結やアクセス制限などの処置を行ないます。</li>
+								<li>CpawCTFは常設です。そのため、解法やflagをインターネットなど第三者が不本意に見てしまう可能性のある場所に公開しないでください！</li>
+								<li>お問い合わせは，twitterアカウント@porisuteruまたは@nomukenへリプライなどを飛ばしてください．</li>
 							</ul>
+						</section>
+
+						<section>
+							<h1>CTFとは</h1>
+							<p>
+								CTFとは、"Capture The Flag"の頭文字をとったものです．<br>
+								CTFはセキュリティコンテストの一つであり、サイバーセキュリティをはじめとするコンピュータに関する技術や知識を競うコンテストです。<br>
+								与えられた問題からflag(フラグ)と呼ばれる文字列を探し出すことで得点し，合計得点で順位を競います．<br>
+								flagは問題ごとに用意された，特定の形式を持つ文字列である場合が多いです．
+							</p>
+							<p>
+								オンラインCTFでは，大会・常設問わずJeopady形式と呼ばれる競技形態が多く行われており，CpawCTFもその一つです．<br>
+								Jeopadyは，ジャンルや難易度ごとに出題された複数の問題に解答する競技形態です．<br>
+								オンサイトCTFでは，参加者同士による攻防戦形式のCTFが行われることもあります．競技形態としては，King of the hillが有名です．
+							</p>
+							<p>
+								世界中でオンラインやオンサイトのCTFが開かれており、日程は<a href="https://ctftime.org/"> CTFtime.org</a>というサイトがまとめているので、参考にしてください。
+							</p>
 						</section>
 
 						<section>
@@ -196,28 +205,29 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.genre
-{
-  width: 100%;
-  margin: 100px auto; 
-  padding: 10px;
-  background-color: #aaa;
+h1 {
+  padding-left: 1em;
+  border-bottom: 1px solid #3df;
 }
 
-.genre ul
-{
-  list-style-type: none;
+h2 {
+  font-size: 1em;
 }
 
-.genre p
-{
-  color: white;
-  font-size: 20px;
+h2:before {
+	content: "> ";
+	color: #3df
 }
 
-.genre section {
-	width: 100%;
+section {
+  margin-bottom: 3em;
 }
 
+a{
+  color: #3df;
+}
+
+a:hover {
+  color: #7ef;
+}
 </style>
