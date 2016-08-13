@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Home from './components/Home'
 import About from './components/About'
-import Questions from './components/Questions'
+import Challenges from './components/Challenges'
 import Ranking from './components/Ranking'
 import Notice from './components/Notice'
 
@@ -24,10 +24,10 @@ router.map({
     component: About
   },
   '/challenges': {
-    component: Questions,
+    component: Challenges,
     subRoutes: {
       '/:category': {
-        component: Questions
+        component: Challenges
       }
     }
   },
