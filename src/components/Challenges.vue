@@ -47,6 +47,10 @@
 <script>
 var $ = require('jquery')
 var apiroot = 'http://localhost/api/'
+var epAuth = 'auth/'
+var epTeams = 'teams/'
+var epCategory = 'categories/'
+var epChallenge = 'questions/'
 export default {
   data: function () {
     return {
@@ -65,15 +69,15 @@ export default {
   },
 
   ready: function () {
-    $.when(this.getFromAPI('auth/'),
-           this.getFromAPI('categories/'),
-           this.getFromAPI('questions/'), this)
+    $.when(this.getFromAPI(epAuth),
+           this.getFromAPI(epCategory),
+           this.getFromAPI(epChallenge), this)
     .done(function (uinfo, clist, qList, vm) {
-      vm.userInfo = uinfo
-      vm.categoryList = clist
-      vm.challengeList = qList
-      var cat = this.$route.params.category
-      var categoryid = this.lookupCatFromName(clist, cat)
+      vm.userInfo = uinfo[0]
+      vm.categoryList = clist[0]
+      vm.challengeList = qList[0]
+      var cat = vm.$route.params.category
+      var categoryid = vm.lookupCatFromName(clist[0], cat)
       if (cat !== undefined && categoryid === null) {
         this.$route.router.go('/challenges')
       }
@@ -122,13 +126,13 @@ export default {
       var categoryName = cat
       var categoryid = this.lookupCatFromName(this.categoryList, categoryName)
       var challenges = this.challengeList
-      $.when(this.getFromAPI('teams/' + this.userInfo.team), this)
+      $.when(this.getFromAPI(epTeams + this.userInfo.team + '/'), this)
       .done(function (team, vm) {
         for (var i in challenges) {
           var challenge = challenges[i]
           if (categoryName === undefined ||
               challenge.category === Number(categoryid)) {
-            var teamChallengeStatus = team.questions.filter(function (item, index) {
+            var teamChallengeStatus = team[0].questions.filter(function (item, index) {
               if (item.id === challenge.id) return true
             })
             var teamObtainedPointsOnAChallenge = teamChallengeStatus.length === 0
