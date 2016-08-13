@@ -2,23 +2,23 @@
   <article>
     <div class="container">
       <div class="contents bg-field">
-        <div class="categorynavbar">
-          <nav>
-            <ul class="categorynav">
-              <li>
-                <a v-bind:class="{ 'activeTab': isActiveTab(undefined) }" v-link="{ path : '/challenges'}">ALL</a>
-              </li>
-              <li v-for="item in categoryList" >
-                <a v-bind:class="{ 'activeTab': isActiveTab(item.name) }" v-link="{ path : '/challenges/' + item.name }">{{ item.name }}</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
         <div class="message" v-if="hasMessage">
           {{ message }} 
         </div>
         <div class="readable">
           <div class="smallbox ">
+            <div class="categorynavbar">
+              <nav>
+                <ul class="categorynav">
+                  <li>
+                    <a v-bind:class="{ 'activeTab': isActiveTab(undefined) }" v-link="{ path : '/challenges'}">ALL</a>
+                  </li>
+                  <li v-for="item in categoryList" >
+                    <a v-bind:class="{ 'activeTab': isActiveTab(item.name) }" v-link="{ path : '/challenges/' + item.name }">{{ item.name }}</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
             <div class="rowHead">
               <div class="cell width10 center">#</div>
               <div class="cell width50">Title</div>
@@ -219,8 +219,7 @@ div.cell
 {
   min-height: 50px;
   width: 100%;
-  margin-top: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #3ef;
   color: #fff;
   clear: both;
 }
@@ -240,7 +239,9 @@ div.message {
   CategoryNavigation
 *********************/
 
-.categorynavbar { background-color: #444; }
+.categorynavbar {
+  border-bottom: 1px solid #33ddff;
+}
 
 ul.categorynav
 {
@@ -256,17 +257,26 @@ ul.categorynav li { float: left; }
 ul.categorynav li a
 {
     display: inline-block;
-    color: #f2f2f2;
+    color: #aaa;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
 }
 
-ul.categorynav li a.activeTab { border-bottom: 2px solid #3df; }
-ul.categorynav li a:hover { background-color: #555; }
+ul.categorynav li a.activeTab {
+  border-top: 1px solid #3df;
+  background-color: rgba(32,64,128,0.5);
+  color: #fff;
+  text-shadow: 0px 0px 5px #3df;
+}
 
-@media screen and (max-width:700px)
+ul.categorynav li a:hover {
+  background-color: rgba(32,64,128,0.5);
+  color: #fff;
+}
+
+@media screen and (max-width:800px)
 {
   ul.categorynav {position: relative;}
   ul.categorynav li
@@ -278,6 +288,14 @@ ul.categorynav li a:hover { background-color: #555; }
   {
     display: block;
     text-align: left;
+  }
+  ul.categorynav li a.activeTab {
+    border-top: none; 
+    border-left: 1px solid #3df;
+    border-right: 1px solid #3df;
+    background-color: rgba(32,64,128,0.5);
+    color: #fff;
+    text-shadow: 0px 0px 5px #3df;
   }
 }
 </style>
