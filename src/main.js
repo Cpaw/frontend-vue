@@ -8,6 +8,7 @@ import Challenges from './components/Challenges'
 import Ranking from './components/Ranking'
 import Notice from './components/Notice'
 import Signin from './components/Signin'
+import Signup from './components/Signup'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -38,8 +39,11 @@ router.map({
   '/notice': {
     component: Notice
   },
-  '/login': {
+  '/signin': {
     component: Signin
+  },
+  '/signup': {
+    component: Signup
   }
 })
 
