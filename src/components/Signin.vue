@@ -2,7 +2,7 @@
     <article>
         <div class="container">
 	    <div class="contents">
-        	test
+        	<h1>test signin</h1>
 	    </div>
         </div>
     </article>
@@ -12,4 +12,7 @@
 </script>
 
 <style scoped>
+h1 {
+    color: white;
+}
 </style>
