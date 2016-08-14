@@ -1,7 +1,15 @@
 <template>
-	<h1>test</h1>
+    <article>
+        <div class="container">
+	    <div class="contents">
+        	test
+	    </div>
+        </div>
+    </article>
 </template>
 
 <script>
 </script>
 
+<style scoped>
+</style>
