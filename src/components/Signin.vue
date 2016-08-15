@@ -4,15 +4,15 @@
 	    <div class="contents">
 	        <div class="formbox">
     	            <h2>Sign in</h2>
-		    <form method="post" action="localhost:3000/login">
-		        <div class="field">
+                    <form method="post" action="localhost:3000/login">
+                        <div class="field">
 			    <label for="signin-name">Email: <br></label>
 			    <input id="signin-name" type="text" name="email" placeholder="email">
-			</div>
-			<div class="field">
-			    <label for="signin-name">Password: <br></label>
-			    <input id="signin-name" type="text" name="email" placeholder="password">
-			</div>
+                        </div>
+                        <div class="field">
+                            <label for="signin-name">Password: <br></label>
+                            <input id="signin-name" type="text" name="email" placeholder="password">
+                        </div>
 		    </form>
 		</div>
 	    </div>
