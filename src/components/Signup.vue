@@ -17,6 +17,8 @@
                             <label for="signin-name">Password: <br></label>
                             <input id="signin-name" type="text" name="email" placeholder="password">
                         </div>
+			<div class="field">
+			    <button v-on:click='signup'>Sign up</button>
 		    </form>
 		</div>
 	    </div>
@@ -25,6 +27,36 @@
 </template>
 
 <script>
+export default {
+  data () {
+    return {
+      userdata: {
+        name: '',
+        mail: '',
+        password: ''
+      }
+    }
+  },
+  ready: function () {
+    this.signup()
+  },
+  methods: {
+    signup: function () {
+      this.$http.post(
+        'http://localhost:3000/signup',
+        {
+          'name': this.userdata.name,
+          'email': this.userdata.email,
+          'password': this.userdata.password
+        }
+      ).then((response) => {
+        this.$route.router.go('/home')
+      }, (response) => {
+        this.$route.router.go('/signup')
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
