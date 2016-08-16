@@ -79,8 +79,8 @@ button {
     text-align: center;
     font-size: 20px;
     color: white;
-    margin:0 auto;
-    padding:5px;
-    background-color:black;
+    margin: 0 auto;
+    padding: 5px;
+    background-color: black;
 }
 </style>

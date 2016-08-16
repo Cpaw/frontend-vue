@@ -7,15 +7,15 @@
                     <form method="post" action="localhost:3000/signup">
 			<div class="field">
 			    <label for="signup-name">User name: <br></label>
-			    <input id="signup-name" type="text" name="user" placeholder="user name">
+			    <input id="signup-name" type="text" name="user" placeholder="user name" v-model='userdata.name'>
                         </div>
                         <div class="field">
 			    <label for="signin-name">Email: <br></label>
-			    <input id="signin-name" type="text" name="email" placeholder="email">
+			    <input id="signin-name" type="text" name="email" placeholder="email" v-model='userdata.email'>
                         </div>
                         <div class="field">
                             <label for="signin-name">Password: <br></label>
-                            <input id="signin-name" type="text" name="email" placeholder="password">
+                            <input id="signin-name" type="text" name="email" placeholder="password" v-model='userdata.password'>
                         </div>
 			<div class="field">
 			    <button v-on:click='signup'>Sign up</button>
@@ -63,6 +63,15 @@ export default {
 h2 {
     text-align: center;
     font-size: 40px;
+}
+
+button {
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    margin: 0 auto;
+    padding: 5px;
+    background-color: black;
 }
 
 .formbox {
