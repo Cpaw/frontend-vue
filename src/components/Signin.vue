@@ -7,14 +7,14 @@
                     <form method="post" action="localhost:3000/login">
                         <div class="field">
 			    <label for="signin-name">Email: <br></label>
-			    <input id="signin-name" type="text" name="email" placeholder="email" v-model="user.email">
+			    <input id="signin-name" type="text" name="email" placeholder="email" v-model='user.email'>
                         </div>
                         <div class="field">
                             <label for="signin-name">Password: <br></label>
-                            <input id="signin-name" type="text" name="email" placeholder="password" v-model="user.password">
+                            <input id="signin-name" type="text" name="email" placeholder="password" v-model='user.password'>
                         </div>
 			<div class="field">
-			  <button v-on:click="login">Sign in</button>
+			    <button v-on:click='login'>Sign in</button>
 			</div>
 		    </form>
 		</div>
@@ -24,13 +24,7 @@
 </template>
 
 <script>
-import cookie from 'cookie-cutter'
 export default {
-  ready () {
-    if (typeof cookie.get('token') !== 'undefined') {
-      this.$route.router.go('/user')
-    }
-  },
   data () {
     return {
       user: {
@@ -39,10 +33,13 @@ export default {
       }
     }
   },
+  ready: function () {
+    this.login()
+  },
   methods: {
     login: function () {
       this.$http.post(
-        this.$parent.backend + 'login',
+        'http://localhost:3000/signin',
         {
           'email': this.user.email,
           'password': this.user.password
@@ -50,7 +47,6 @@ export default {
       ).then((response) => {
         this.$route.router.go('/home')
       }, (response) => {
-        console.log('error')
         this.$route.router.go('/signin')
       })
     }
