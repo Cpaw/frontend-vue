@@ -13,8 +13,9 @@
                             <label for="signin-name">Password: <br></label>
                             <input id="signin-name" type="text" name="email" placeholder="password" v-model="user.password">
                         </div>
-			<div class="field>
+			<div class="field">
 			  <button v-on:click="login">Sign in</button>
+			</div>
 		    </form>
 		</div>
 	    </div>
@@ -76,5 +77,14 @@ h2 {
 
 .field input {
     font-size: 16px;
+}
+
+button {
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    margin:0 auto;
+    padding:5px;
+    background-color:black;
 }
 </style>
