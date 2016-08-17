@@ -54,12 +54,8 @@ router.redirect({
 })
 
 router.beforeEach(function (transition) {
-  if (transition.to.path === '/' ||
-      transition.to.path === '/home' ||
-      transition.to.path === '/about' ||
-      transition.to.path === '/notice' ||
-      transition.to.path === '/signin' ||
-      transition.to.path === '/signup') {
+  var regexp = '/(home|about|ranking|notice|signin|signup)?$'
+  if (transition.to.path.match(regexp)) {
     transition.next()
   } else {
     $.when(
@@ -77,6 +73,7 @@ router.beforeEach(function (transition) {
     }).fail(function (data) {
       router.app.user = null
       transition.abort()
+      router.go('/')
     })
   }
 })

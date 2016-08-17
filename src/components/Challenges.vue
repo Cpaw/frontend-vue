@@ -66,16 +66,6 @@ export default {
     }
   },
 
-  route: {
-    activate: function (transition) {
-      if (this.$root.user === null) {
-        this.$route.router.go('/home')
-      } else {
-        transition.next()
-      }
-    }
-  },
-
   ready: function () {
     $.when(this.getFromAPI(epCategory),
            this.getFromAPI(epChallenge), this)
