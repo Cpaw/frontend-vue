@@ -142,6 +142,7 @@ ul.menu li a
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size: 17px;
+	cursor: pointer;
 }
 
 ul.menu li a:hover 
