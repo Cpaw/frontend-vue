@@ -15,13 +15,13 @@
                         <ul id="object">
                             <li class="notice_instance" v-for="notice in notices">
                                 <div v-if="notice.pr == vm.state" class="notice_title">
-                                    {{ notice.title }}
+                                    <h2>{{ notice.id }}. {{ notice.title }}</h2>
                                 </div>
                                 <div v-if="notice.pr == vm.state" class="notice_body">
-                                    {{ notice.messages }}
+                                    {{ notice.body }}
                                 </div>
                                 <div v-if="notice.pr == vm.state" class="notice_footer">
-                                    {{ notice.date }}        
+                                    {{ notice.created_at }}        
                                 </div>
                             </li>
                         </ul>
@@ -56,9 +56,10 @@ export default {
     var notices = [
       {
         pr: '',
+        id: '',
         title: '',
-        messages: '',
-        date: ''
+        body: '',
+        created_at: ''
       }
     ]
     return {
@@ -141,6 +142,7 @@ ul.menu li a
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size: 17px;
+	cursor: pointer;
 }
 
 ul.menu li a:hover 
