@@ -18,10 +18,10 @@
                                     {{ notice.title }}
                                 </div>
                                 <div v-if="notice.pr == vm.state" class="notice_body">
-                                    {{ notice.messages }}
+                                    {{ notice.body }}
                                 </div>
                                 <div v-if="notice.pr == vm.state" class="notice_footer">
-                                    {{ notice.date }}        
+                                    {{ notice.created_at }}        
                                 </div>
                             </li>
                         </ul>
@@ -56,9 +56,10 @@ export default {
     var notices = [
       {
         pr: '',
+        id: '',
         title: '',
-        messages: '',
-        date: ''
+        body: '',
+        created_at: ''
       }
     ]
     return {
