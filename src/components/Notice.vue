@@ -15,7 +15,7 @@
                         <ul id="object">
                             <li class="notice_instance" v-for="notice in notices">
                                 <div v-if="notice.pr == vm.state" class="notice_title">
-                                    {{ notice.title }}
+                                    <h2>{{ notice.id }}. {{ notice.title }}</h2>
                                 </div>
                                 <div v-if="notice.pr == vm.state" class="notice_body">
                                     {{ notice.body }}
