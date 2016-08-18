@@ -98,9 +98,12 @@ export default {
       return $.ajax(
         {
           url: apiroot + endpoint,
-          crossDomain: true,
           type: 'GET',
-          dataType: 'json'
+          dataType: 'json',
+          crossDomain: true,
+          xhrFields: {
+            withCredentials: true
+          }
         }
       )
     },

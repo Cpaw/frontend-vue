@@ -1,53 +1,75 @@
 <template>
-    <article>
-        <div class="container">
-	    <div class="contents">
-	        <div class="formbox">
-    	            <h2>Sign in</h2>
-                    <form method="post" action="localhost:3000/login">
-                        <div class="field">
-			    <label for="signin-name">Email: <br></label>
-			    <input id="signin-name" type="text" name="email" placeholder="email" v-model='user.email'>
-                        </div>
-                        <div class="field">
-                            <label for="signin-name">Password: <br></label>
-                            <input id="signin-name" type="text" name="email" placeholder="password" v-model='user.password'>
-                        </div>
-			<div class="field">
-			    <button v-on:click='login'>Sign in</button>
-			</div>
-		    </form>
-		</div>
-	    </div>
+  <article>
+    <div class="container">
+      <div class="contents">
+        <div class="formbox">
+          <h2>Sign in</h2>
+          <div class="message" v-if="hasMessage">
+            {{ message }} 
+          </div>
+          <form v-on:submit.prevent="signin">
+            <div class="field">
+              <label for="signin-email">Email: <br></label>
+              <input id="signin-email" type="text" name="email" placeholder="email" v-model='user.email'>
+            </div>
+            <div class="field">
+              <label for="signin-passwd">Password: <br></label>
+              <input id="signin-passwd" type="text" name="password" placeholder="password" v-model='user.password'>
+            </div>
+            <div class="field">
+              <button type="submit">Sign in</button>
+            </div>
+          </form>
         </div>
-    </article>
+      </div>
+    </div>
+  </article>
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
   data () {
     return {
       user: {
         email: '',
         password: ''
-      }
+      },
+      message: ''
+    }
+  },
+  computed: {
+    hasMessage: function () {
+      return this.message !== ''
     }
   },
   ready: function () {
-    this.login()
+    if (this.$root.user !== null) {
+      this.$route.router.go('/challenges')
+    }
   },
   methods: {
-    login: function () {
-      this.$http.post(
-        'http://localhost:3000/signin',
-        {
-          'email': this.user.email,
-          'password': this.user.password
-        }
-      ).then((response) => {
-        this.$route.router.go('/home')
-      }, (response) => {
-        this.$route.router.go('/signin')
+    signin: function () {
+      $.when(
+        $.ajax(
+          {
+            url: 'http://localhost/api/auth/',
+            type: 'POST',
+            dataType: 'json',
+            data: {'email': this.user.email, 'password': this.user.password},
+            crossDomain: true,
+            xhrFields: {
+              withCredentials: true
+            }
+          }
+        ),
+        this
+      ).done(function (data, vm) {
+        vm.$root.user = data[0]
+        vm.$route.router.go('challenges')
+      }).fail(function (a, b, c) {
+        this.$root.user = null
+        this.message = b
       })
     }
   }
