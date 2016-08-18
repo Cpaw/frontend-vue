@@ -16,6 +16,22 @@ Vue.use(VueResource)
 
 var router = new VueRouter()
 
+var getAuthState = function () {
+  return $.when(
+    $.ajax(
+      {
+        url: 'http://localhost/api/auth/',
+        type: 'GET',
+        dataType: 'json',
+        crossDomain: true,
+        xhrFields: {
+          withCredentials: true
+        }
+      }
+    )
+  )
+}
+
 router.map({
   '/': {
     component: Home
@@ -58,16 +74,7 @@ router.beforeEach(function (transition) {
   if (transition.to.path.match(regexp)) {
     transition.next()
   } else {
-    $.when(
-      $.ajax(
-        {
-          url: 'http://localhost/api/auth/',
-          crossDomain: true,
-          type: 'GET',
-          dataType: 'json'
-        }
-      )
-    ).done(function (data) {
+    getAuthState().done(function (data) {
       router.app.user = data
       transition.next()
     }).fail(function (data) {
@@ -78,4 +85,10 @@ router.beforeEach(function (transition) {
   }
 })
 
-router.start(App, 'app')
+router.start(App, 'app', function () {
+  getAuthState().done(function (data) {
+    router.app.user = data
+  }).fail(function (data) {
+    router.app.user = null
+  })
+})

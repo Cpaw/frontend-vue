@@ -9,7 +9,7 @@
           <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
           <li><a v-link="{ path : '/notice' }">Notice</a></li>
           <template v-if="authed">
-          <li class="rightalign"><a v-link="{ path : '/signout' }">Sign out</a></li>
+          <li class="rightalign"><a @click="signout">Sign out</a></li>
           <li class="rightalign"><a v-link="{ path : '/user/info' }">{{ user.username }} : {{ user.points }}pts</a></li>
           </template>
           <template v-else>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
   data () {
     return {}
@@ -35,7 +36,6 @@ export default {
       return this.$root.user !== null
     },
     user: function () {
-      console.log(this.authed)
       if (this.authed) {
         return this.$root.user
       } else {
@@ -51,6 +51,25 @@ export default {
       } else {
         x.className = 'topnav'
       }
+    },
+    signout: function () {
+      $.when(
+        $.ajax(
+          {
+            url: this.$root.apiroot + 'auth/',
+            type: 'DELETE',
+            dataType: 'json',
+            crossDomain: true,
+            xhrFields: {
+              withCredentials: true
+            }
+          }
+        ),
+        this
+      ).done(function (data, vm) {
+        vm.$root.user = null
+        vm.$route.router.go('/')
+      })
     }
   }
 }
