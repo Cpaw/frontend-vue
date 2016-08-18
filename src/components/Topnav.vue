@@ -10,7 +10,7 @@
           <li><a v-link="{ path : '/notice' }">Notice</a></li>
           <template v-if="authed">
           <li class="rightalign"><a v-link="{ path : '/signout' }">Sign out</a></li>
-          <li class="rightalign"><a v-link="{ path : '/user/info }">{{ user.username }} : {{ user.points }}pts</a></li>
+          <li class="rightalign"><a v-link="{ path : '/user/info' }">{{ user.username }} : {{ user.points }}pts</a></li>
           </template>
           <template v-else>
           <li class="rightalign"><a v-link="{ path : '/signup' }">Sign up</a></li>
