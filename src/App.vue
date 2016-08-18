@@ -11,6 +11,13 @@ import Topnav from './components/Topnav'
 import Foot from './components/Foot'
 
 export default {
+  data: function () {
+    return {
+      apiroot: 'http://localhost/api/',
+      user: null,
+      authed: false
+    }
+  },
   components: {
     Topnav,
     Foot

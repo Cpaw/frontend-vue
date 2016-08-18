@@ -5,11 +5,17 @@
         <ul class="topnav" id="toggleNav">
           <li v-link-active><a v-link="{ path : '/home' }">Home</a></li>
           <li v-link-active><a v-link="{ path : '/about' }">About</a></li>
-          <li><a v-link="{ path : '/challenges' }">Challenges</a></li>
+          <li v-if="authed"><a v-link="{ path : '/challenges' }">Challenges</a></li>
           <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
           <li><a v-link="{ path : '/notice' }">Notice</a></li>
+          <template v-if="authed">
+          <li class="rightalign"><a v-link="{ path : '/signout' }">Sign out</a></li>
+          <li class="rightalign"><a v-link="{ path : '/user/info }">{{ user.username }} : {{ user.points }}pts</a></li>
+          </template>
+          <template v-else>
           <li class="rightalign"><a v-link="{ path : '/signup' }">Sign up</a></li>
           <li class="rightalign"><a v-link="{ path : '/signin' }">Sign in</a></li>
+          </template>
           <li class="icon">
               <a href="javascript:void(0);" @click="toggle('toggleNav')">&#9776;</a>
           </li>
@@ -23,6 +29,19 @@
 export default {
   data () {
     return {}
+  },
+  computed: {
+    authed: function () {
+      return this.$root.user !== null
+    },
+    user: function () {
+      console.log(this.authed)
+      if (this.authed) {
+        return this.$root.user
+      } else {
+        return null
+      }
+    }
   },
   methods: {
     toggle: function (id) {

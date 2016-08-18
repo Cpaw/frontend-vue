@@ -45,16 +45,14 @@
 </template>
 
 <script>
-var $ = require('jquery')
+import $ from 'jquery'
 var apiroot = 'http://localhost/api/'
-var epAuth = 'auth/'
 var epTeams = 'teams/'
 var epCategory = 'categories/'
 var epChallenge = 'questions/'
 export default {
   data: function () {
     return {
-      userInfo: null,
       categoryList: [],
       challengeList: [],
       challengeListForRender: [],
@@ -69,11 +67,9 @@ export default {
   },
 
   ready: function () {
-    $.when(this.getFromAPI(epAuth),
-           this.getFromAPI(epCategory),
+    $.when(this.getFromAPI(epCategory),
            this.getFromAPI(epChallenge), this)
-    .done(function (uinfo, clist, qList, vm) {
-      vm.userInfo = uinfo[0]
+    .done(function (clist, qList, vm) {
       vm.categoryList = clist[0]
       vm.challengeList = qList[0]
       var cat = vm.$route.params.category
@@ -126,7 +122,7 @@ export default {
       var categoryName = cat
       var categoryid = this.lookupCatFromName(this.categoryList, categoryName)
       var challenges = this.challengeList
-      $.when(this.getFromAPI(epTeams + this.userInfo.team + '/'), this)
+      $.when(this.getFromAPI(epTeams + this.$root.user.team + '/'), this)
       .done(function (team, vm) {
         for (var i in challenges) {
           var challenge = challenges[i]

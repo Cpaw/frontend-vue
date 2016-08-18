@@ -9,6 +9,7 @@ import Ranking from './components/Ranking'
 import Notice from './components/Notice'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
+import $ from 'jquery'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -50,6 +51,31 @@ router.map({
 router.redirect({
   // 見つからなかったルートは /home にリダイレクト
   '*': '/home'
+})
+
+router.beforeEach(function (transition) {
+  var regexp = '/(home|about|ranking|notice|signin|signup)?$'
+  if (transition.to.path.match(regexp)) {
+    transition.next()
+  } else {
+    $.when(
+      $.ajax(
+        {
+          url: 'http://localhost/api/auth/',
+          crossDomain: true,
+          type: 'GET',
+          dataType: 'json'
+        }
+      )
+    ).done(function (data) {
+      router.app.user = data
+      transition.next()
+    }).fail(function (data) {
+      router.app.user = null
+      transition.abort()
+      router.go('/')
+    })
+  }
 })
 
 router.start(App, 'app')
