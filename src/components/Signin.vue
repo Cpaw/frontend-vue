@@ -14,7 +14,7 @@
             </div>
             <div class="field">
               <label for="signin-passwd">Password: <br></label>
-              <input id="signin-passwd" type="text" name="password" placeholder="password" v-model='user.password'>
+              <input id="signin-passwd" type="password" name="password" placeholder="password" v-model='user.password'>
             </div>
             <div class="field">
               <button type="submit">Sign in</button>
