@@ -1,28 +1,29 @@
 <template>
     <article>
-        <div class="container">
-	    <div class="contents">
-	        <div class="formbox">
-    	            <h2>Sign up</h2>
-                    <form method="post" action="localhost:3000/signup">
-			<div class="field">
-			    <label for="signup-name">User name: <br></label>
-			    <input id="signup-name" type="text" name="user" placeholder="user name" v-model='userdata.name'>
-                        </div>
-                        <div class="field">
-			    <label for="signin-name">Email: <br></label>
-			    <input id="signin-name" type="text" name="email" placeholder="email" v-model='userdata.email'>
-                        </div>
-                        <div class="field">
-                            <label for="signin-name">Password: <br></label>
-                            <input id="signin-name" type="text" name="email" placeholder="password" v-model='userdata.password'>
-                        </div>
-			<div class="field">
-			    <button v-on:click='signup'>Sign up</button>
-		    </form>
-		</div>
-	    </div>
-	</div>
+      <div class="container">
+        <div class="contents">
+          <div class="formbox">
+            <h2>Sign up</h2>
+            <form v-on:submit.prevent="signup">
+              <div class="field">
+               <label for="signup-name">User name: <br></label>
+               <input id="signup-name" type="text" name="user" placeholder="user name" v-model='userdata.name'>
+              </div>
+              <div class="field">
+               <label for="signin-email">Email: <br></label>
+               <input id="signin-email" type="text" name="email" placeholder="email" v-model='userdata.email'>
+              </div>
+              <div class="field">
+               <label for="signin-passwd">Password: <br></label>
+               <input id="signin-passwd" type="password" name="password" placeholder="password" v-model='userdata.password'>
+              </div>
+              <div class="field">
+               <button type="submit">Sign up</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </article>
 </template>
 
@@ -37,23 +38,13 @@ export default {
       }
     }
   },
-  ready: function () {
-    this.signup()
+  init: function () {
+    if (this.$root.user !== null) {
+      this.$route.router.go('/challenges')
+    }
   },
   methods: {
     signup: function () {
-      this.$http.post(
-        'http://localhost:3000/signup',
-        {
-          'name': this.userdata.name,
-          'email': this.userdata.email,
-          'password': this.userdata.password
-        }
-      ).then((response) => {
-        this.$route.router.go('/home')
-      }, (response) => {
-        this.$route.router.go('/signup')
-      })
     }
   }
 }
