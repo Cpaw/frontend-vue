@@ -43,7 +43,7 @@ export default {
       return this.message !== ''
     }
   },
-  ready: function () {
+  init: function () {
     if (this.$root.user !== null) {
       this.$route.router.go('/challenges')
     }
