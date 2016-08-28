@@ -46,7 +46,6 @@
 
 <script>
 import $ from 'jquery'
-var apiroot = 'http://localhost/api/'
 var epTeams = 'teams/'
 var epCategory = 'categories/'
 var epChallenge = 'questions/'
@@ -97,7 +96,7 @@ export default {
     getFromAPI: function (endpoint) {
       return $.ajax(
         {
-          url: apiroot + endpoint,
+          url: this.$root.apiroot + endpoint,
           type: 'GET',
           dataType: 'json',
           crossDomain: true,
