@@ -53,7 +53,7 @@ export default {
       $.when(
         $.ajax(
           {
-            url: 'http://localhost/api/auth/',
+            url: this.$root.apiroot + '/auth/',
             type: 'POST',
             dataType: 'json',
             data: {'email': this.user.email, 'password': this.user.password},
