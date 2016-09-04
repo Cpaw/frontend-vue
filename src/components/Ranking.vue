@@ -49,7 +49,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + '/ranking',
+        url: this.$root.apiroot + 'ranking',
         dataType: 'json',
         success: function (json) {
           that.$data.ranking = json
@@ -63,25 +63,29 @@ export default {
 
 <style scoped>
 .col_rank {
-	color:white;
-	width: 20%;
-	text-align: center;
+    color:white;
+    width: 20%;
+    text-align: center;
 }
 
 .col_name {
-	color: white;
-	width: 50%;
-	text-align: center;
+    color: white;
+    width: 50%;
+    text-align: center;
 }
 
 .col_score {
-	color: white;
-	width:30%;	
-	text-align: center;
+    color: white;
+    width:30%;	
+    text-align: center;
 }
 
 table {
-      width:100%;
+    width:100%;
+}
+
+thead tr th {
+    font-size: 30px;
 }
 
 tr {

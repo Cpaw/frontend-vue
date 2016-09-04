@@ -76,7 +76,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + '/notice',
+        url: this.$root.apiroot + 'notice',
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
@@ -93,7 +93,7 @@ export default {
     list-style-type: none;
 }
 
-.notice_instance{
+.notice_instance {
     margin: 1em 0;
 }
 
