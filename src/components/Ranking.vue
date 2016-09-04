@@ -85,7 +85,13 @@ table {
 }
 
 thead tr th {
-    font-size: 30px;
+    border-bottom: 1px solid #22ddff;
+    font-size: 25px;
+}
+
+tbody tr td {
+    font-size: 18px;
+    padding: 1em;
 }
 
 tr {
