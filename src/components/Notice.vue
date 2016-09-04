@@ -76,7 +76,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + '/notice',
+        url: this.$root.apiroot + 'notice',
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
@@ -93,28 +93,28 @@ export default {
     list-style-type: none;
 }
 
-.notice_instance{
+.notice_instance {
     margin: 1em 0;
 }
 
 .notice_title {
-	padding: 0 1em;
+    padding: 0 1em;
     border-bottom: 1px solid #33ddff;
 }
 
 .notice_body {
-	padding: 0.5em 1em;  
+    padding: 0.5em 1em;  
 }
 
 .notice_footer {
-	padding: 0 1em;
-	text-align: right;
+    padding: 0 1em;
+    text-align: right;
 }
 
 ul {
-   list-style-type: none;
-   margin: 0;
-   padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 ul.menu {
