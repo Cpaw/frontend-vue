@@ -5,8 +5,8 @@
 				<div class="readable">
 					<div class="smallbox">
 						<section>
-							<h1>ルール</h1>
-							<p>CpawCTFの問題に挑戦する際は、以下のルールに従ってください。</p>
+							<h1>Rules</h1>
+							<p>CpawCTFに挑戦する際は、必ず以下のルールに従ってください。</p>
 							<ul>
 								<li>設置されている各問題からflagを探し、問題ページにあるフォームから送信すると問題に応じた得点が入ります。</li>
 								<li>CpawCTFにおけるすべてのflagは，次の形式です : Cpaw{example}</li>
@@ -60,6 +60,7 @@
 								鍵の長さが短い、アルゴリズムに脆弱性がある、など問題に使用されている暗号の穴をついて解読する問題や、<br>
 								そもそもどのようなアルゴリズムで暗号化されているのかを調べる問題などがあります。<br>
 							</p>
+
 						</section>
 
 						<section>
@@ -201,7 +202,6 @@
 		</div>
 	</article>
 </template>
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

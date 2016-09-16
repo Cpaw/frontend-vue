@@ -14,11 +14,11 @@
                     <div class="smallbox">
                         <ul id="object">
                             <li class="notice_instance" v-for="notice in notices">
-                                <div v-if="notice.pr == vm.state" class="notice_title">
-                                    <h2>{{ notice.id }}. {{ notice.title }}</h2>
+                                <div v-if="notice.priority == vm.state" class="notice_title">
+                                    <h2>{{ notice.title }}</h2>
                                 </div>
                                 <div v-if="notice.pr == vm.state" class="notice_body">
-                                    {{ notice.body }}
+                                    {{ notice.description }}
                                 </div>
                                 <div v-if="notice.pr == vm.state" class="notice_footer">
                                     {{ notice.created_at }}        
@@ -37,17 +37,17 @@ import Vue from 'vue'
 var $ = require('jquery')
 var vm = new Vue({
   data: {
-    state: 'notice'
+    state: 0
   },
   methods: {
     NoticeButton: function (event) {
-      this.state = 'notice'
+      this.state = 0
     },
     UpdateButton: function (event) {
-      this.state = 'update'
+      this.state = 1
     },
     BugButton: function (event) {
-      this.state = 'bug'
+      this.state = 2
     }
   }
 })
@@ -55,10 +55,9 @@ export default {
   data () {
     var notices = [
       {
-        pr: '',
-        id: '',
         title: '',
-        body: '',
+        description: '',
+        priority: '',
         created_at: ''
       }
     ]
@@ -76,7 +75,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'notice',
+        url: this.$root.apiroot + 'notice/',
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
