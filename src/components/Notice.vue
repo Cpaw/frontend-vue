@@ -17,11 +17,12 @@
                                 <div v-if="notice.priority == vm.state" class="notice_title">
                                     <h2>{{ notice.title }}</h2>
                                 </div>
-                                <div v-if="notice.pr == vm.state" class="notice_body">
+                                <div v-if="notice.priority == vm.state" class="notice_body">
                                     {{ notice.description }}
                                 </div>
-                                <div v-if="notice.pr == vm.state" class="notice_footer">
-                                    {{ notice.created_at }}        
+                                <div v-if="notice.priority == vm.state" class="notice_footer">
+				
+                                    {{ notice.created_at }}
                                 </div>
                             </li>
                         </ul>
