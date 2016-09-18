@@ -12,7 +12,7 @@
                 <tbody id="object">
                     <tr v-for="data in ranking">
                         <td class="col_rank">
-                            {{ data.rank }}
+                            {{ $index+1 }}
                         </td>
                         <td class="col_name">
                             {{ data.name }}
@@ -49,7 +49,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'ranking',
+        url: this.$root.apiroot + 'ranking/',
         dataType: 'json',
         success: function (json) {
           that.$data.ranking = json
