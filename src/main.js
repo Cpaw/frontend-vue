@@ -20,7 +20,7 @@ var getAuthState = function () {
   return $.when(
     $.ajax(
       {
-        url: 'http://localhost/api/auth/',
+        url: 'http://localhost/api-auth/login/',
         type: 'GET',
         dataType: 'json',
         crossDomain: true,
