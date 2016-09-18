@@ -18,7 +18,7 @@
                                     <h2>{{ notice.title }}</h2>
                                 </div>
                                 <div v-if="notice.priority == vm.state" class="notice_body">
-                                    {{ notice.description }}
+                                    <div v-html="notice.description"></div>
                                 </div>
                                 <div v-if="notice.priority == vm.state" class="notice_footer">
 				
