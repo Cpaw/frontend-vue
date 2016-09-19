@@ -10,7 +10,7 @@
           <form v-on:submit.prevent="signin">
             <div class="field">
               <label for="signin-email">Email: <br></label>
-              <input id="signin-email" type="text" name="email" placeholder="email" v-model='user.email'>
+              <input id="signin-email" type="text" name="email" placeholder="email" v-model='user.username'>
             </div>
             <div class="field">
               <label for="signin-passwd">Password: <br></label>
@@ -27,12 +27,12 @@
 </template>
 
 <script>
-import $ from 'jquery'
+var $ = require('jquery')
 export default {
   data () {
     return {
       user: {
-        email: '',
+        username: '',
         password: ''
       },
       message: ''
@@ -53,10 +53,10 @@ export default {
       $.when(
         $.ajax(
           {
-            url: this.$root.apiroot + '/auth/',
+            url: 'http://localhost:8000/api-auth/login/',
             type: 'POST',
             dataType: 'json',
-            data: {'email': this.user.email, 'password': this.user.password},
+            data: {'csrfmiddlewaretoken': 'Vkp97XKHCepr0O2sRec3HItSoV2mdHvy', 'username': this.user.username, 'password': this.user.password},
             crossDomain: true,
             xhrFields: {
               withCredentials: true
