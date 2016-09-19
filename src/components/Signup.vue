@@ -7,7 +7,7 @@
             <form v-on:submit.prevent="signup">
               <div class="field">
                <label for="signup-name">User name: <br></label>
-               <input id="signup-name" type="text" name="user" placeholder="user name" v-model='userdata.name'>
+               <input id="signup-name" type="text" name="username" placeholder="user name" v-model='userdata.username'>
               </div>
               <div class="field">
                <label for="signin-email">Email: <br></label>
@@ -28,12 +28,13 @@
 </template>
 
 <script>
+var $ = require('jquery')
 export default {
   data () {
     return {
       userdata: {
-        name: '',
-        mail: '',
+        username: '',
+        email: '',
         password: ''
       }
     }
@@ -45,6 +46,17 @@ export default {
   },
   methods: {
     signup: function () {
+      var that = this
+      $.ajax({
+        type: 'POST',
+        crossDomain: true,
+        url: this.$root.apiroot + 'signup/',
+        dataType: 'json',
+        success: function (json) {
+          that.$data.userdata = json
+        },
+        data: that.$data.userdata
+      })
     }
   }
 }
