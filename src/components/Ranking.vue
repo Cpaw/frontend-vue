@@ -15,7 +15,7 @@
                             {{ $index+1 }}
                         </td>
                         <td class="col_name">
-                            {{ data.name }}
+                            {{ data.username }}
                         </td>
                         <td class="col_score">
                             {{ data.score }}        
@@ -34,7 +34,7 @@ export default {
     var ranking = [
       {
         rank: '',
-        name: '',
+        username: '',
         score: ''
       }
     ]
