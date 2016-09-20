@@ -10,7 +10,7 @@
           <form v-on:submit.prevent="signin">
             <div class="field">
               <label for="signin-email">Email: <br></label>
-              <input id="signin-email" type="text" name="email" placeholder="email" v-model='user.email'>
+              <input id="signin-email" type="text" name="username" placeholder="user name" v-model='user.username'>
             </div>
             <div class="field">
               <label for="signin-passwd">Password: <br></label>
@@ -27,12 +27,23 @@
 </template>
 
 <script>
-import $ from 'jquery'
+var $ = require('jquery')
+function getCookie (cname) {
+  var name = cname + '='
+  var ca = document.cookie.split(';')
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) === ' ') c = c.substring(1)
+    if (c.indexOf(name) !== -1) return c.substring(name.length, c.length)
+  }
+  return ''
+}
+var csrftoken = getCookie('csrftoken')
 export default {
   data () {
     return {
       user: {
-        email: '',
+        username: '',
         password: ''
       },
       message: ''
@@ -53,13 +64,16 @@ export default {
       $.when(
         $.ajax(
           {
-            url: this.$root.apiroot + '/auth/',
+            url: this.$root.apiroot + 'auth/login/',
             type: 'POST',
             dataType: 'json',
-            data: {'email': this.user.email, 'password': this.user.password},
             crossDomain: true,
             xhrFields: {
               withCredentials: true
+            },
+            data: {'csrfmiddlewaretoken': csrftoken, 'username': this.user.username, 'password': this.user.password},
+            beforeSend: function (output, status, xhr) {
+              csrftoken = getCookie('csrftoken')
             }
           }
         ),

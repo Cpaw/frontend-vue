@@ -13,7 +13,7 @@ import Foot from './components/Foot'
 export default {
   data: function () {
     return {
-      apiroot: 'http://localhost:8000/api/',
+      apiroot: 'http://172.16.125.199/api/',
       user: null,
       authed: false
     }
