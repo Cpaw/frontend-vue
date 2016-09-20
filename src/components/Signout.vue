@@ -7,12 +7,17 @@
 var $ = require('jquery')
 export default {
   data () {},
+  ready: function () {
+    this.signout()
+  },
   methods: {
     signout: function () {
       $.ajax({
-        type: 'GET'
+        type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'auth/signout/',
+        url: this.$root.apiroot + 'auth/logout/',
+        dataType: 'json',
+        data: null
       })
     }
   }
