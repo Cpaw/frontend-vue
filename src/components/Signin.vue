@@ -10,7 +10,7 @@
           <form v-on:submit.prevent="signin">
             <div class="field">
               <label for="signin-email">Email: <br></label>
-              <input id="signin-email" type="text" name="email" placeholder="email" v-model='user.username'>
+              <input id="signin-email" type="text" name="username" placeholder="user name" v-model='user.username'>
             </div>
             <div class="field">
               <label for="signin-passwd">Password: <br></label>
