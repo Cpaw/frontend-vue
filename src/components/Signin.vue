@@ -28,6 +28,17 @@
 
 <script>
 var $ = require('jquery')
+function getCookie (cname) {
+  var name = cname + '='
+  var ca = document.cookie.split(';')
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) === ' ') c = c.substring(1)
+    if (c.indexOf(name) !== -1) return c.substring(name.length, c.length)
+  }
+  return ''
+}
+var csrftoken = getCookie('csrftoken')
 export default {
   data () {
     return {
@@ -53,13 +64,16 @@ export default {
       $.when(
         $.ajax(
           {
-            url: 'http://localhost:8000/api-auth/login/',
+            url: this.$root.apiroot + 'auth/login/',
             type: 'POST',
             dataType: 'json',
-            data: {'csrfmiddlewaretoken': 'Vkp97XKHCepr0O2sRec3HItSoV2mdHvy', 'username': this.user.username, 'password': this.user.password},
             crossDomain: true,
             xhrFields: {
               withCredentials: true
+            },
+            data: {'csrfmiddlewaretoken': csrftoken, 'username': this.user.username, 'password': this.user.password},
+            beforeSend: function (output, status, xhr) {
+              csrftoken = getCookie('csrftoken')
             }
           }
         ),
