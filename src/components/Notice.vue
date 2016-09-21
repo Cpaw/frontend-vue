@@ -57,7 +57,7 @@ export default {
     var notices = [
       {
         title: '',
-        description: '',
+        body: '',
         priority: '',
         created_at: ''
       }
@@ -76,7 +76,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'notice/',
+        url: this.$root.apiroot + 'notices/',
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
