@@ -77,6 +77,7 @@ export default {
             },
             error: function (data, vm) {
               window.location.reload()
+              window.location.href = '#!/home'
             }
           }
         ),

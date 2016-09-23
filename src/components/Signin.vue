@@ -74,6 +74,10 @@ export default {
             data: {'csrfmiddlewaretoken': csrftoken, 'username': this.postdata.username, 'password': this.postdata.password},
             beforeSend: function (output, status, xhr) {
               csrftoken = getCookie('csrftoken')
+            },
+            success: function (data, vm) {
+              window.location.href = '#!/home'
+              window.location.reload()
             }
           }
         ),
