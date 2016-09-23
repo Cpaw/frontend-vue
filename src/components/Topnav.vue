@@ -122,6 +122,7 @@ ul.topnav li
 ul.topnav li.rightalign
 {
     float: right;
+    cursor: pointer;
 }
 
 ul.topnav li a 
