@@ -75,16 +75,13 @@ export default {
             xhrFields: {
               withCredentials: true
             },
-            error: function () {
+            error: function (data, vm) {
               window.location.reload()
             }
           }
         ),
         this
       ).done(function (data, vm) {
-        vm.$root.user = null
-        vm.$route.router.go('/')
-        window.location.href = '172.16.125.199/home'
       })
     }
   }
