@@ -9,12 +9,12 @@
           </div>
           <form v-on:submit.prevent="signin">
             <div class="field">
-              <label for="signin-email">Email: <br></label>
-              <input id="signin-email" type="text" name="username" placeholder="user name" v-model='user.username'>
+              <label for="signin-email">User name: <br></label>
+              <input id="signin-email" type="text" name="username" placeholder="user name" v-model='postdata.username'>
             </div>
             <div class="field">
               <label for="signin-passwd">Password: <br></label>
-              <input id="signin-passwd" type="password" name="password" placeholder="password" v-model='user.password'>
+              <input id="signin-passwd" type="password" name="password" placeholder="password" v-model='postdata.password'>
             </div>
             <div class="field">
               <button type="submit">Sign in</button>
@@ -42,7 +42,7 @@ var csrftoken = getCookie('csrftoken')
 export default {
   data () {
     return {
-      user: {
+      postdata: {
         username: '',
         password: ''
       },
@@ -64,14 +64,14 @@ export default {
       $.when(
         $.ajax(
           {
-            url: this.$root.apiroot + 'auth/login/',
+            url: this.$root.apiroot + 'auth/',
             type: 'POST',
             dataType: 'json',
             crossDomain: true,
             xhrFields: {
               withCredentials: true
             },
-            data: {'csrfmiddlewaretoken': csrftoken, 'username': this.user.username, 'password': this.user.password},
+            data: {'csrfmiddlewaretoken': csrftoken, 'username': this.postdata.username, 'password': this.postdata.password},
             beforeSend: function (output, status, xhr) {
               csrftoken = getCookie('csrftoken')
             }
@@ -80,6 +80,7 @@ export default {
         this
       ).done(function (data, vm) {
         vm.$root.user = data[0]
+        this.$root.auth = true
         vm.$route.router.go('challenges')
       }).fail(function (a, b, c) {
         this.$root.user = null

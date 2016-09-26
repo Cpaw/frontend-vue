@@ -9,7 +9,7 @@
           <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
           <li><a v-link="{ path : '/notice' }">Notice</a></li>
           <template v-if="authed">
-          <li class="rightalign"><a @click="signout">Sign out</a></li>
+          <li class="rightalign"><a v-link="{ path : '/home' }" @click="signout">Sign out</a></li>
           <li class="rightalign"><a v-link="{ path : '/user/info' }">{{ user.username }} : {{ user.points }}pts</a></li>
           </template>
           <template v-else>
@@ -27,6 +27,16 @@
 
 <script>
 import $ from 'jquery'
+function getCookie (cname) {
+  var name = cname + '='
+  var ca = document.cookie.split(';')
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) === ' ') c = c.substring(1)
+    if (c.indexOf(name) !== -1) return c.substring(name.length, c.length)
+  }
+  return ''
+}
 export default {
   data () {
     return {}
@@ -58,8 +68,10 @@ export default {
           {
             url: this.$root.apiroot + 'auth/',
             type: 'DELETE',
-            dataType: 'json',
             crossDomain: true,
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'))
+            },
             xhrFields: {
               withCredentials: true
             }
