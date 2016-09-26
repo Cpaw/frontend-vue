@@ -9,7 +9,7 @@
           <li><a v-link="{ path : '/ranking' }">Ranking</a></li>
           <li><a v-link="{ path : '/notice' }">Notice</a></li>
           <template v-if="authed">
-          <li class="rightalign"><a v-link="{ path : '/home' }" @click="signout">Sign out</a></li>
+          <li class="rightalign"><a @click="signout">Sign out</a></li>
           <li class="rightalign"><a v-link="{ path : '/user/info' }">{{ user.username }} : {{ user.points }}pts</a></li>
           </template>
           <template v-else>
@@ -74,13 +74,15 @@ export default {
             },
             xhrFields: {
               withCredentials: true
+            },
+            error: function (data, vm) {
+              window.location.reload()
+              window.location.href = '#!/home'
             }
           }
         ),
         this
       ).done(function (data, vm) {
-        vm.$root.user = null
-        vm.$route.router.go('/')
       })
     }
   }
@@ -120,6 +122,7 @@ ul.topnav li
 ul.topnav li.rightalign
 {
     float: right;
+    cursor: pointer;
 }
 
 ul.topnav li a 
