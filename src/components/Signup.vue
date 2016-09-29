@@ -50,10 +50,12 @@ export default {
       $.ajax({
         type: 'POST',
         crossDomain: true,
-        url: this.$root.apiroot + 'signup/',
+        url: this.$root.apiroot + 'users/',
         dataType: 'json',
         success: function (json) {
           that.$data.userdata = json
+          window.location.href = '#!/signin'
+          window.location.reload()
         },
         data: that.$data.userdata
       })
