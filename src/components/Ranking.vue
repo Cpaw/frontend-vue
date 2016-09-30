@@ -10,15 +10,15 @@
                     </tr>
                 </thead>
                 <tbody id="object">
-                    <tr v-for="data in ranking">
+                    <tr v-for="data in ranking | orderBy 'points' -1">
                         <td class="col_rank">
                             {{ $index+1 }}
                         </td>
                         <td class="col_name">
-                            {{ data.username }}
+                            {{ data.name }}
                         </td>
                         <td class="col_score">
-                            {{ data.score }}        
+                            {{ data.points }}        
                         </td>
                     </tr>
                 </tbody>
@@ -33,9 +33,9 @@ export default {
   data () {
     var ranking = [
       {
-        rank: '',
-        username: '',
-        score: ''
+        id: '',
+        name: '',
+        points: ''
       }
     ]
     return {ranking}
@@ -49,7 +49,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'ranking/',
+        url: this.$root.apiroot + 'teams/',
         dataType: 'json',
         success: function (json) {
           that.$data.ranking = json
