@@ -71,12 +71,14 @@ h2 {
 }
 
 button {
-    text-align: center;
-    font-size: 20px;
-    color: white;
+    display: block;
+    padding: 10px 30px;
+    border: none;
     margin: 0 auto;
-    padding: 5px;
-    background-color: black;
+    background-color: #333;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
 }
 
 .formbox {
@@ -84,13 +86,32 @@ button {
 }
 
 .field {
-    margin: 5%;
-    text-align: center;
+    width: 240px;
+    margin: 30px auto;
+    color: #fff;
     font-size: 20px;
-    color: white;
+    text-align: left;
 }
 
 .field input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    background-color: rgba(34,34,34,.7);
+    background-size: 0% 1px;
+    color: #eee;
     font-size: 16px;
+    transition: background-size 0.3s ease;
 }
+
+.field input:focus {
+    background-image: linear-gradient(#3df, #3df);
+    background-position: center bottom;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+}
+
 </style>
