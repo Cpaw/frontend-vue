@@ -4,7 +4,7 @@
 	    <div class="contents">
 	        <div class="readable">
                     <div class="smallbox">
-		        <h1>test{{ user.username }}</h1>
+		        <h1>test{{ userdata.id }}</h1>
 		    </div>
 		</div>
             </div>
@@ -18,14 +18,19 @@ export default {
   data () {
     var userdata = [
       {
-        id: '',
+        id: 0,
         username: '',
         email: '',
-        points: '',
+        points: ''
+      }
+    ]
+    var teamdata = [
+      {
+        questions: []
       }
     ]
     return {
-      notices
+      userdata, teamdata
     }
   },
   ready: function () {
@@ -41,6 +46,20 @@ export default {
         dataType: 'json',
         success: function (json) {
           that.$data.userdata = json
+          that.getTeam()
+        },
+        data: null
+      })
+    },
+    getTeam: function () {
+      var that = this
+      $.ajax({
+        type: 'GET',
+        crossDomain: true,
+        url: this.$root.apiroot + 'teams/' + that.$data.userdata.id + '/',
+        dataType: 'json',
+        success: function (json) {
+          that.$data.teamdata = json
         },
         data: null
       })
