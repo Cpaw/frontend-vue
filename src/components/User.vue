@@ -8,6 +8,9 @@
 			        <h1>{{ userdata.username }}</h1>
 				<h2>Email : {{ userdata.email }}</h2>
 				<h2>Score : {{ userdata.points }}</h2>
+				<div v-for="question in questions">
+					<h2>{{ question.id }}</h2>
+				</div>
 			</section>
 		    </div>
 		</div>
@@ -30,13 +33,18 @@ export default {
         last_score_time: ''
       }
     ]
-    var teamdata = [
+    var questions = [
       {
-        questions: []
+        id: ''
+      }
+    ]
+    var category = [
+      {
+        category: ''
       }
     ]
     return {
-      userdata, teamdata
+      userdata, questions, category
     }
   },
   ready: function () {
@@ -65,9 +73,25 @@ export default {
         url: this.$root.apiroot + 'teams/' + that.$data.userdata.team + '/',
         dataType: 'json',
         success: function (json) {
-          that.$data.teamdata = json
+          that.$data.questions = json.questions
+          that.getQuestion()
         },
         data: null
+      })
+    },
+    getQuestion: function () {
+      var that = this
+      $.each(that.$data.questions, function (i) {
+        $.ajax({
+          type: 'GET',
+          crossDomain: true,
+          url: that.$root.apiroot + 'questions/' + that.$data.questions[i].id + '/',
+          dataType: 'json',
+          success: function (json) {
+            that.$data.category = json
+          },
+          data: null
+        })
       })
     }
   }
