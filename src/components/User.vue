@@ -16,12 +16,12 @@
 var $ = require('jquery')
 export default {
   data () {
-    var notices = [
+    var userdata = [
       {
-        title: '',
-        body: '',
-        priority: '',
-        created_at: ''
+        id: '',
+        username: '',
+        email: '',
+        points: '',
       }
     ]
     return {
@@ -37,10 +37,10 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'notices/',
+        url: this.$root.apiroot + 'auth/',
         dataType: 'json',
         success: function (json) {
-          that.$data.notices = json
+          that.$data.userdata = json
         },
         data: null
       })
