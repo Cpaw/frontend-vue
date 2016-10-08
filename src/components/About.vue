@@ -216,7 +216,7 @@ h2 {
 
 h2:before {
 	content: "> ";
-	color: #3df
+	color: #3df;
 }
 
 section {

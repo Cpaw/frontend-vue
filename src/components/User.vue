@@ -4,7 +4,11 @@
 	    <div class="contents">
 	        <div class="readable">
                     <div class="smallbox">
-		        <h1>test{{ userdata.id }}</h1>
+		    	<section>
+			        <h1>{{ userdata.username }}</h1>
+				<h2>Email : {{ userdata.email }}</h2>
+				<h2>Score : {{ userdata.points }}</h2>
+			</section>
 		    </div>
 		</div>
             </div>
@@ -18,10 +22,12 @@ export default {
   data () {
     var userdata = [
       {
-        id: 0,
+        id: '',
         username: '',
         email: '',
-        points: ''
+        team: '',
+        points: '',
+        last_score_time: ''
       }
     ]
     var teamdata = [
@@ -56,7 +62,7 @@ export default {
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'teams/' + that.$data.userdata.id + '/',
+        url: this.$root.apiroot + 'teams/' + that.$data.userdata.team + '/',
         dataType: 'json',
         success: function (json) {
           that.$data.teamdata = json
@@ -69,6 +75,26 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  padding-left: 1em;
+  border-bottom: 1px solid #3df;
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1em;
+  margin: 1em;
+}
+
+h2:before {
+  content: "> ";
+  color: #3df;
+}
+
+section {
+  margin-bottom: 3em;
+}
+
 .notice_container li {
     list-style-type: none;
 }
