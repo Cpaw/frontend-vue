@@ -9,6 +9,7 @@ import Ranking from './components/Ranking'
 import Notice from './components/Notice'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
+import User from './components/User'
 import $ from 'jquery'
 
 Vue.use(VueRouter)
@@ -61,6 +62,14 @@ router.map({
   },
   '/signup': {
     component: Signup
+  },
+  '/user': {
+    component: User,
+    subRoutes: {
+      '/info': {
+        component: User
+      }
+    }
   }
 })
 
