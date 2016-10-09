@@ -5,12 +5,11 @@
 	        <div class="readable">
                     <div class="smallbox">
 		    	<section>
-			        <h1>{{ userdata.username }}</h1>
+				<h1>{{ userdata.username }}</h1>
 				<h2>Email : {{ userdata.email }}</h2>
 				<h2>Score : {{ userdata.points }}</h2>
-				<div v-for="question in questions">
-					<h2>{{ question.id }}</h2>
-				</div>
+				<h2>{{ category[0].value }}</h2>
+				<chart :type="'radar'" :data="seriesData" :options="options"></chart>
 			</section>
 		    </div>
 		</div>
@@ -20,8 +19,12 @@
 </template>
 
 <script>
+import Chart from 'vue-bulma-chartjs'
 var $ = require('jquery')
 export default {
+  components: {
+    Chart
+  },
   data () {
     var userdata = [
       {
@@ -40,15 +43,72 @@ export default {
     ]
     var category = [
       {
-        category: ''
+        label: 'web', value: 0
+      },
+      {
+        label: 'pwn', value: 0
+      },
+      {
+        label: 'crypto', value: 0
+      },
+      {
+        label: 'network', value: 0
+      },
+      {
+        label: 'binary', value: 0
+      },
+      {
+        label: 'forensic', value: 0
+      },
+      {
+        label: 'stegano', value: 0
+      },
+      {
+        label: 'misc', value: 0
       }
     ]
+    var options = {
+      tooltips: {
+        mode: 'label'
+      }
+    }
+    var labels = ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc']
+    var backgroundColor = [
+      'rgba(31, 200, 219, 1)'
+    ]
+    var series = ['Your Data']
     return {
-      userdata, questions, category
+      userdata, questions, category, options, labels, backgroundColor, series
     }
   },
-  ready: function () {
+  created: function () {
     this.getJson()
+  },
+  mounted: {
+    seriesData () {
+      let data = {
+        labels: this.labels
+      }
+      data.datasets = this.series.map((e, i) => {
+        return {
+          data: [
+            this.category[0].value,
+            this.category[1].value,
+            this.category[2].value,
+            this.category[3].value,
+            this.category[4].value,
+            this.category[5].value,
+            this.category[6].value,
+            this.category[7].value
+          ],
+          label: this.series[i],
+          borderColor: this.backgroundColor[i].replace(/1\)$/, '.5)'),
+          pointBackgroundColor: this.backgroundColor[i],
+          backgroundColor: this.backgroundColor[i].replace(/1\)$/, '.5)')
+        }
+      })
+      return data
+    }
   },
   methods: {
     getJson: function () {
@@ -88,7 +148,24 @@ export default {
           url: that.$root.apiroot + 'questions/' + that.$data.questions[i].id + '/',
           dataType: 'json',
           success: function (json) {
-            that.$data.category = json
+            if (json.category === 1) {
+              that.$data.category[0].value += 1
+            } else if (json.category === 2) {
+              that.$data.category[1].value += 1
+            } else if (json.category === 3) {
+              that.$data.category[2].value += 1
+            } else if (json.category === 4) {
+              that.$data.category[3].value += 1
+            } else if (json.category === 5) {
+              that.$data.category[4].value += 1
+            } else if (json.category === 6) {
+              that.$data.category[5].value += 1
+            } else if (json.category === 7) {
+              that.$data.category[6].value += 1
+            } else {
+              that.$data.category[7].value += 1
+            }
+            this._chart.update()
           },
           data: null
         })
@@ -117,6 +194,11 @@ h2:before {
 
 section {
   margin-bottom: 3em;
+}
+
+polygon {
+    fill: #42b983;
+    opacity: .75;
 }
 
 .notice_container li {
