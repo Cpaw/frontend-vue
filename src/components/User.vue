@@ -4,7 +4,12 @@
 	    <div class="contents">
 	        <div class="readable">
                     <div class="smallbox">
-		        <h1>test{{ user.username }}</h1>
+		    	<section>
+				<h1>{{ userdata.username }}</h1>
+				<h2>Email : {{ userdata.email }}</h2>
+				<h2>Score : {{ userdata.points }}</h2>
+  		                <chart :type="'radar'" :data="data" :options="options"></chart>
+			</section>
 		    </div>
 		</div>
             </div>
@@ -13,34 +18,98 @@
 </template>
 
 <script>
+import Chart from 'vue-bulma-chartjs'
 var $ = require('jquery')
 export default {
+  components: {
+    Chart
+  },
   data () {
-    var notices = [
+    var userdata = this.$root.user
+    var questions = [
       {
-        title: '',
-        body: '',
-        priority: '',
-        created_at: ''
+        cat: ''
       }
     ]
+    var data = {
+      labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
+      datasets: [{
+        label: ['Your Data'],
+        data: [
+          0, 0, 0, 0, 0, 0, 0, 0
+        ],
+        borderColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)'),
+        pointBackgroundColor: 'rgba(31, 200, 219, 1)',
+        backgroundColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)')
+      }]
+    }
+    var options = {
+      tooltips: {
+        mode: 'false'
+      }
+    }
+    var labels = ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc']
+    var backgroundColor = [
+      'rgba(31, 200, 219, 1)'
+    ]
+    var series = ['Your Data']
     return {
-      notices
+      userdata, questions, options, labels, backgroundColor, series, data
     }
   },
   ready: function () {
-    this.getJson()
+    this.getTeam()
   },
   methods: {
-    getJson: function () {
+    getTeam: function () {
       var that = this
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'notices/',
+        url: this.$root.apiroot + 'teams/' + this.$root.user.team + '/',
         dataType: 'json',
         success: function (json) {
-          that.$data.notices = json
+          that.$data.questions = json.questions
+          var web = 0
+          var pwn = 0
+          var crypto = 0
+          var network = 0
+          var binary = 0
+          var forensic = 0
+          var stegano = 0
+          var misc = 0
+          $.each(that.$data.questions, function (i) {
+            if (that.$data.questions[i].cat === 1) {
+              web += 1
+            } else if (that.$data.questions[i].cat === 2) {
+              pwn += 1
+            } else if (that.$data.questions[i].cat === 3) {
+              crypto += 1
+            } else if (that.$data.questions[i].cat === 4) {
+              network += 1
+            } else if (that.$data.questions[i].cat === 5) {
+              binary += 1
+            } else if (that.$data.questions[i].cat === 6) {
+              forensic += 1
+            } else if (that.$data.questions[i].cat === 7) {
+              stegano += 1
+            } else {
+              misc += 1
+            }
+          })
+          var data = {
+            labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
+            datasets: [{
+              label: ['Your Data'],
+              data: [
+                web, pwn, crypto, network, binary, forensic, stegano, misc
+              ],
+              borderColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)'),
+              pointBackgroundColor: 'rgba(31, 200, 219, 1)',
+              backgroundColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)')
+            }]
+          }
+          that.$data.data = data
         },
         data: null
       })
@@ -50,6 +119,31 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  padding-left: 1em;
+  border-bottom: 1px solid #3df;
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1em;
+  margin: 1em;
+}
+
+h2:before {
+  content: "> ";
+  color: #3df;
+}
+
+section {
+  margin-bottom: 3em;
+}
+
+polygon {
+    fill: #42b983;
+    opacity: .75;
+}
+
 .notice_container li {
     list-style-type: none;
 }
