@@ -8,7 +8,6 @@
 				<h1>{{ userdata.username }}</h1>
 				<h2>Email : {{ userdata.email }}</h2>
 				<h2>Score : {{ userdata.points }}</h2>
-				<h2>{{ category[0].value }}</h2>
   		                <chart :type="'radar'" :data="data" :options="options"></chart>
 			</section>
 		    </div>
@@ -32,38 +31,12 @@ export default {
         cat: ''
       }
     ]
-    var category = [
-      {
-        label: 'web', value: 0
-      },
-      {
-        label: 'pwn', value: 0
-      },
-      {
-        label: 'crypto', value: 0
-      },
-      {
-        label: 'network', value: 0
-      },
-      {
-        label: 'binary', value: 0
-      },
-      {
-        label: 'forensic', value: 0
-      },
-      {
-        label: 'stegano', value: 0
-      },
-      {
-        label: 'misc', value: 0
-      }
-    ]
     var data = {
       labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
       datasets: [{
         label: ['Your Data'],
         data: [
-          category[0].value, 0, 0, 0, 0, 0, 0, 0
+          0, 0, 0, 0, 0, 0, 0, 0
         ],
         borderColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)'),
         pointBackgroundColor: 'rgba(31, 200, 219, 1)',
@@ -81,13 +54,11 @@ export default {
     ]
     var series = ['Your Data']
     return {
-      userdata, questions, category, options, labels, backgroundColor, series, data
+      userdata, questions, options, labels, backgroundColor, series, data
     }
   },
   ready: function () {
     this.getTeam()
-    this.$set('x', 0)
-    this.$delete('x')
   },
   methods: {
     getTeam: function () {
@@ -109,32 +80,22 @@ export default {
           var misc = 0
           $.each(that.$data.questions, function (i) {
             if (that.$data.questions[i].cat === 1) {
-              // that.$data.category[0].value += 1
               web += 1
             } else if (that.$data.questions[i].cat === 2) {
-              // that.$data.category[1].value += 1
               pwn += 1
             } else if (that.$data.questions[i].cat === 3) {
-              // that.$data.category[2].value += 1
               crypto += 1
             } else if (that.$data.questions[i].cat === 4) {
-              // that.$data.category[3].value += 1
               network += 1
             } else if (that.$data.questions[i].cat === 5) {
-              // that.$data.category[4].value += 1
               binary += 1
             } else if (that.$data.questions[i].cat === 6) {
-              // that.$data.category[5].value += 1
               forensic += 1
             } else if (that.$data.questions[i].cat === 7) {
-              // that.$data.category[6].value += 1
               stegano += 1
             } else {
-              // that.$data.category[7].value += 1
               misc += 1
             }
-            that.$set('x', 0)
-            that.$delete('x')
           })
           var data = {
             labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
