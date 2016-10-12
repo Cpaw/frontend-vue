@@ -9,7 +9,7 @@
 				<h2>Email : {{ userdata.email }}</h2>
 				<h2>Score : {{ userdata.points }}</h2>
 				<h2>{{ category[0].value }}</h2>
-				<chart :type="'radar'" :data="seriesData" :options="options"></chart>
+  		                <chart :type="'radar'" :data="data" :options="options"></chart>
 			</section>
 		    </div>
 		</div>
@@ -26,19 +26,10 @@ export default {
     Chart
   },
   data () {
-    var userdata = [
-      {
-        id: '',
-        username: '',
-        email: '',
-        team: '',
-        points: '',
-        last_score_time: ''
-      }
-    ]
+    var userdata = this.$root.user
     var questions = [
       {
-        id: ''
+        cat: ''
       }
     ]
     var category = [
@@ -67,9 +58,21 @@ export default {
         label: 'misc', value: 0
       }
     ]
+    var data = {
+      labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
+      datasets: [{
+        label: ['Your Data'],
+        data: [
+          category[0].value, 0, 0, 0, 0, 0, 0, 0
+        ],
+        borderColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)'),
+        pointBackgroundColor: 'rgba(31, 200, 219, 1)',
+        backgroundColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)')
+      }]
+    }
     var options = {
       tooltips: {
-        mode: 'label'
+        mode: 'false'
       }
     }
     var labels = ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc']
@@ -78,97 +81,76 @@ export default {
     ]
     var series = ['Your Data']
     return {
-      userdata, questions, category, options, labels, backgroundColor, series
+      userdata, questions, category, options, labels, backgroundColor, series, data
     }
   },
-  created: function () {
-    this.getJson()
-  },
-  mounted: {
-    seriesData () {
-      let data = {
-        labels: this.labels
-      }
-      data.datasets = this.series.map((e, i) => {
-        return {
-          data: [
-            this.category[0].value,
-            this.category[1].value,
-            this.category[2].value,
-            this.category[3].value,
-            this.category[4].value,
-            this.category[5].value,
-            this.category[6].value,
-            this.category[7].value
-          ],
-          label: this.series[i],
-          borderColor: this.backgroundColor[i].replace(/1\)$/, '.5)'),
-          pointBackgroundColor: this.backgroundColor[i],
-          backgroundColor: this.backgroundColor[i].replace(/1\)$/, '.5)')
-        }
-      })
-      return data
-    }
+  ready: function () {
+    this.getTeam()
+    this.$set('x', 0)
+    this.$delete('x')
   },
   methods: {
-    getJson: function () {
-      var that = this
-      $.ajax({
-        type: 'GET',
-        crossDomain: true,
-        url: this.$root.apiroot + 'auth/',
-        dataType: 'json',
-        success: function (json) {
-          that.$data.userdata = json
-          that.getTeam()
-        },
-        data: null
-      })
-    },
     getTeam: function () {
       var that = this
       $.ajax({
         type: 'GET',
         crossDomain: true,
-        url: this.$root.apiroot + 'teams/' + that.$data.userdata.team + '/',
+        url: this.$root.apiroot + 'teams/' + this.$root.user.team + '/',
         dataType: 'json',
         success: function (json) {
           that.$data.questions = json.questions
-          that.getQuestion()
+          var web = 0
+          var pwn = 0
+          var crypto = 0
+          var network = 0
+          var binary = 0
+          var forensic = 0
+          var stegano = 0
+          var misc = 0
+          $.each(that.$data.questions, function (i) {
+            if (that.$data.questions[i].cat === 1) {
+              // that.$data.category[0].value += 1
+              web += 1
+            } else if (that.$data.questions[i].cat === 2) {
+              // that.$data.category[1].value += 1
+              pwn += 1
+            } else if (that.$data.questions[i].cat === 3) {
+              // that.$data.category[2].value += 1
+              crypto += 1
+            } else if (that.$data.questions[i].cat === 4) {
+              // that.$data.category[3].value += 1
+              network += 1
+            } else if (that.$data.questions[i].cat === 5) {
+              // that.$data.category[4].value += 1
+              binary += 1
+            } else if (that.$data.questions[i].cat === 6) {
+              // that.$data.category[5].value += 1
+              forensic += 1
+            } else if (that.$data.questions[i].cat === 7) {
+              // that.$data.category[6].value += 1
+              stegano += 1
+            } else {
+              // that.$data.category[7].value += 1
+              misc += 1
+            }
+            that.$set('x', 0)
+            that.$delete('x')
+          })
+          var data = {
+            labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
+            datasets: [{
+              label: ['Your Data'],
+              data: [
+                web, pwn, crypto, network, binary, forensic, stegano, misc
+              ],
+              borderColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)'),
+              pointBackgroundColor: 'rgba(31, 200, 219, 1)',
+              backgroundColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)')
+            }]
+          }
+          that.$data.data = data
         },
         data: null
-      })
-    },
-    getQuestion: function () {
-      var that = this
-      $.each(that.$data.questions, function (i) {
-        $.ajax({
-          type: 'GET',
-          crossDomain: true,
-          url: that.$root.apiroot + 'questions/' + that.$data.questions[i].id + '/',
-          dataType: 'json',
-          success: function (json) {
-            if (json.category === 1) {
-              that.$data.category[0].value += 1
-            } else if (json.category === 2) {
-              that.$data.category[1].value += 1
-            } else if (json.category === 3) {
-              that.$data.category[2].value += 1
-            } else if (json.category === 4) {
-              that.$data.category[3].value += 1
-            } else if (json.category === 5) {
-              that.$data.category[4].value += 1
-            } else if (json.category === 6) {
-              that.$data.category[5].value += 1
-            } else if (json.category === 7) {
-              that.$data.category[6].value += 1
-            } else {
-              that.$data.category[7].value += 1
-            }
-            this._chart.update()
-          },
-          data: null
-        })
       })
     }
   }
