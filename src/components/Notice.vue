@@ -80,6 +80,10 @@ export default {
         dataType: 'json',
         success: function (json) {
           that.$data.notices = json
+          for (var i = 0, l = that.$data.notices.length; i < l; i++) {
+            that.$data.notices[i].created_at = that.$data.notices[i].created_at.slice(0, that.$data.notices[i].created_at.indexOf('T'))
+            console.log(that.$data.notices[i].created_at)
+          }
         },
         data: null
       })
