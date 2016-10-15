@@ -13,9 +13,9 @@
                 <div class="readable">
                     <div class="smallbox">
                         <ul id="object">
-                            <li class="notice_instance" v-for="notice in notices">
+                            <li class="notice_instance" v-for="notice in reverse" >
                                 <div v-if="notice.priority == vm.state" class="notice_title">
-                                    <h2>{{ $index+1 }}. {{ notice.title }}</h2>
+                                    <h2>{{ notice.title }}</h2>
                                 </div>
                                 <div v-if="notice.priority == vm.state" class="notice_body">
                                     <div v-html="notice.description"></div>
@@ -70,6 +70,11 @@ export default {
   ready: function () {
     this.getJson()
   },
+  computed: {
+    reverse: function () {
+      return this.notices.reverse()
+    }
+  },
   methods: {
     getJson: function () {
       var that = this
@@ -82,7 +87,6 @@ export default {
           that.$data.notices = json
           for (var i = 0, l = that.$data.notices.length; i < l; i++) {
             that.$data.notices[i].created_at = that.$data.notices[i].created_at.slice(0, that.$data.notices[i].created_at.indexOf('T'))
-            console.log(that.$data.notices[i].created_at)
           }
         },
         data: null
