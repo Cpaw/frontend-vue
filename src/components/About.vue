@@ -25,23 +25,67 @@
 								</li>
 							</ul>
 							<h3>CTFのスケジュール</h3>
-							<p>世界中でオンラインやオンサイトのCTFが開かれており、日程は<a href="https://ctftime.org/"> CTFtime.org</a>というサイトがまとめているので、参考にしてください。</p>
+							<p>現在世界中でオンラインやオンサイトのCTFが開かれています。主要な大会の日程は<a href="https://ctftime.org/"> CTFTIME</a>というサイトがまとめています。</p>
 						</section>
 						<section>
-							<h2>各ジャンル特徴の解説</h2>
-							<p>出題される問題のジャンルは以下の11種類に分類されます．</p>
+							<h2>CTFのジャンル</h2>
+							<p>CTFで出題されるジャンルは、おおよそ以下の11種類に分類されます．</p>
 							<ul>
-								<li>Crypto(暗号問題)</li>
-								<li>Web(ウェブ問題)</li>
-								<li>Reversing(リバース・エンジニアリング問題)</li>
-								<li>Pwn(脆弱性攻撃問題)</li>
-								<li>Forensic(フォレンジック問題)</li>
-								<li>Network(ネットワーク通信問題)</li>
-								<li>PPC(プログラミング問題)</li>
-								<li>Steganography(データ隠蔽問題)</li>
-								<li>Recon(追跡問題)</li>
-								<li>Trivia(知識問題)</li>
-								<li>Misc(その他)</li>
+								<li>Web
+									<ol>
+										<li>Webセキュリティに関する問題</li>
+									</ol>
+								</li>
+								<li>Network
+									<ol>
+										<li>ネットワークに関する問題</li>
+									</ol>
+								</li>
+								<li>Crypto
+									<ol>
+										<li>暗号に関する問題</li>
+									</ol>
+								</li>
+								<li>Reversing
+									<ol>
+										<li>リバース・エンジニアリングに関する問題</li>
+									</ol>
+								</li>
+								<li>Pwn
+									<ol>
+										<li>プログラムの脆弱性を攻撃する問題</li>
+									</ol>
+								</li>
+								<li>Forensic
+									<ol>
+										<li>様々なデータから情報を集める問題</li>
+									</ol>
+								</li>
+								<li>PPC
+									<ol>
+										<li>プログラミング技術に関する問題</li>
+									</ol>
+								</li>
+								<li>Steganography
+									<ol>
+										<li>様々なデータに隠された情報を見つけ出す問題</li>
+									</ol>
+								</li>
+								<li>Recon
+									<ol>
+										<li>対象の情報を調査する問題</li>
+									</ol>
+								</li>
+								<li>Trivia
+									<ol>
+										<li>雑学や知識を問う問題</li>
+									</ol>
+								</li>
+								<li>Misc
+									<ol>
+										<li>その他の問題</li>
+									</ol>
+								</li>
 							</ul>
 						</section>
 						<section>
@@ -223,7 +267,9 @@ section {
 }
 
 a{
-	color: #3df;
+	padding: 10px;
+	color: #2cf;
+	text-decoration: none; 
 }
 
 a:hover {
