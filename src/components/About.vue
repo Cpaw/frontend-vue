@@ -61,24 +61,9 @@
 										<li>様々なデータから情報を集める問題</li>
 									</ol>
 								</li>
-								<li>PPC
-									<ol>
-										<li>プログラミング技術に関する問題</li>
-									</ol>
-								</li>
 								<li>Steganography
 									<ol>
 										<li>様々なデータに隠された情報を見つけ出す問題</li>
-									</ol>
-								</li>
-								<li>Recon
-									<ol>
-										<li>対象の情報を調査する問題</li>
-									</ol>
-								</li>
-								<li>Trivia
-									<ol>
-										<li>雑学や知識を問う問題</li>
 									</ol>
 								</li>
 								<li>Misc
@@ -93,18 +78,22 @@
 							<h3>Crypto</h3>
 							<p>
 								暗号に関する問題です。<br>
-
+								<iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fspeakerdeck.com%2Fplayer%2F5cd4dafd42524241b4ddd4c41d9c2bbc&url=https%3A%2F%2Fspeakerdeck.com%2Fpalloc%2Fcryptojiang-yi-zi-liao&image=https%3A%2F%2Fspeakerd.s3.amazonaws.com%2Fpresentations%2F5cd4dafd42524241b4ddd4c41d9c2bbc%2Fslide_0.jpg&key=internal&type=text%2Fhtml&schema=speakerdeck" width="800" height="630" scrolling="no" frameborder="0" allowfullscreen></iframe>
 							</p>
-
-
+							<h3>Network</h3>
+							<p>
+								ネットワークに関する知識を用いてflagを取る問題です。
+							</p>
+							<iframe src="//www.slideshare.net/slideshow/embed_code/key/xzjHkIOgl2rdlM" width="800" height="630" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 							<h3>Web</h3>
 							<p>
-								ウェブサイトの脆弱性を探し、攻撃することでflagを見つける問題です。<br>
-								SQLi、XSSなどと呼ばれる脆弱性を探したり、HTTPヘッダーに隠されたflagを見つけ出すなどの問題があります。<br>
+								ウェブサイトの脆弱性を探し、攻撃することでflagを見つける問題です。
+								<iframe src="https://drive.google.com/file/d/0B3sek9Uc2waZVmpqVVNjbmkwTkU/preview" width="800" height="630"></iframe>
 							</p>
 							<h3>Reversing</h3>
 							<p>
-								様々なプログラムを逆アセンブラなどによって解析し、flagを見つけ出す問題です。<br>
+								様々なプログラムを逆アセンブラなどによって解析し、flagを見つけ出す問題です。
+								<iframe src="https://drive.google.com/file/d/0B7hCqNkhIBZ-U04zRGdkQ3pPZzg/preview" width="800" height="630"></iframe>
 							</p>
 							<h3>Pwn</h3>
 							<p>
@@ -118,36 +107,14 @@
 								様々なデータの中に隠されているflagを探し出す問題です。
 								ゴミ箱で削除されたデータを復元し、flagを探したり、大量のパケットの中からflagの情報が書いてあるパケットを見つけ出したりする問題が主		です。
 							</p>
-							<h3>Network</h3>
-							<p>
-								ネットワークに関する知識を用いてflagを取る問題です。
-								pcapファイルと呼ばれるネットワークを流れているデータを保存したファイルからflagを見つけ出したり、
-								特定のターゲットに通信をし、様々な攻撃をすることでflagを取る問題があります。
-							</p>
-							<h3>PPC</h3>
-							<p>
-								プログラミング力を図る問題です。
-								何をやればflagが出るのかは自明になっていて、それを実際に実装してflagを取れるかを試される問題で、競技プログラミングに類似しています		。
-							</p>
 							<h3>Steganography</h3>
 							<p>
 								音声や画像のデータに隠されたflagを探し出す問題です。
 								画像のバイナリデータにflagが埋め込まれていたり、
 								音声の波形がflagの文字になっていたりとユニークな方法でflagを探しだす問題が多い特徴があります。
+								<iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fspeakerdeck.com%2Fplayer%2F75af7bf7c9c642d094334563e6f7c442&url=https%3A%2F%2Fspeakerdeck.com%2Fkuroiwasi%2Fcpawctf-steganography&image=https%3A%2F%2Fspeakerd.s3.amazonaws.com%2Fpresentations%2F75af7bf7c9c642d094334563e6f7c442%2Fslide_0.jpg&key=internal&type=text%2Fhtml&schema=speakerdeck" width="800" height="630" scrolling="no" frameborder="0" allowfullscreen></iframe>
 							</p>
-							<h3>Recon</h3>
-							<p>
-								
-								特定の人物の情報を集めて答える問題です。
-								その人の住んでいる国の地域をSNSなどで情報収集し特定するなど近年問題視されているSNSの危険性などを知ることができるジャンルです。
-							</p>
-							<h3>Trivia</h3>
-							<p>
-								雑学問題です。
-								クイズが出されて回答するというのが通常の形式です。
-								Googleをうまく使ってときましょう！
-							</p>
-							<h3>Misc.</h3>
+							<h3>Misc</h3>
 							<p>
 								いわゆる「その他」の問題です。
 								通常あまり細かくジャンル分けしないCTFが多いため、ジャンル分けされていない問題などはすべてMiscに分類されます。
