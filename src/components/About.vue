@@ -31,9 +31,9 @@
 						<section>
 							<p>CTFで出題されるジャンルは、おおよそ以下の11種類に分類されます．</p>
 							<ul>
-								<li>Web
+								<li>Crypto
 									<ol>
-										<li>Webセキュリティに関する問題</li>
+										<li>暗号に関する問題</li>
 									</ol>
 								</li>
 								<li>Network
@@ -41,9 +41,9 @@
 										<li>ネットワークセキュリティに関する問題</li>
 									</ol>
 								</li>
-								<li>Crypto
+								<li>Web
 									<ol>
-										<li>暗号に関する問題</li>
+										<li>Webセキュリティに関する問題</li>
 									</ol>
 								</li>
 								<li>Reversing
@@ -82,36 +82,34 @@
 							</p>
 							<h3>Network</h3>
 							<p>
-								ネットワークに関する知識を用いてflagを取る問題です。
+								ネットワークに関する問題です。
 							</p>
 							<iframe src="//www.slideshare.net/slideshow/embed_code/key/xzjHkIOgl2rdlM" width="800" height="630" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 							<h3>Web</h3>
 							<p>
-								ウェブサイトの脆弱性を探し、攻撃することでflagを見つける問題です。
-								<iframe src="https://drive.google.com/file/d/0B3sek9Uc2waZVmpqVVNjbmkwTkU/preview" width="800" height="630"></iframe>
+								ウェブサイトの脆弱性などを見つけ、攻撃する問題です。
+								<iframe src="https://drive.google.com/file/d/0B3sek9Uc2waZVmpqVVNjbmkwTkU/preview" width="800" height="455"></iframe>
 							</p>
 							<h3>Reversing</h3>
 							<p>
-								様々なプログラムを逆アセンブラなどによって解析し、flagを見つけ出す問題です。
-								<iframe src="https://drive.google.com/file/d/0B7hCqNkhIBZ-U04zRGdkQ3pPZzg/preview" width="800" height="630"></iframe>
+								様々なプログラムを逆アセンブラなどによって解析する問題です。
+								<iframe src="https://drive.google.com/file/d/0B7hCqNkhIBZ-U04zRGdkQ3pPZzg/preview" width="800" height="455"></iframe>
 							</p>
 							<h3>Pwn</h3>
 							<p>
-								プログラムの脆弱性を攻撃し、flagを取る問題です。
+								プログラムの脆弱性を攻撃し、flagを取る問題です。<br>
 								サーバーでプログラムが動いていて、そのプログラムを手元で解析し、
 								脆弱性を見つけてプログラムに異常な動作をさせることによりshellを取るのが大まかな流れですが、
 								深い知識が必要となるため初心者には少し敷居の高いジャンルとなっています。
 							</p>
 							<h3>Forensic</h3>
 							<p>
-								様々なデータの中に隠されているflagを探し出す問題です。
-								ゴミ箱で削除されたデータを復元し、flagを探したり、大量のパケットの中からflagの情報が書いてあるパケットを見つけ出したりする問題が主		です。
+								様々なデータの中に隠されているflagを探し出す問題です。<br>
+								ゴミ箱で削除されたデータを復元し、flagを探したり、大量のパケットの中からflagの情報が書いてあるパケットを見つけ出したりする問題がでます。
 							</p>
 							<h3>Steganography</h3>
 							<p>
 								音声や画像のデータに隠されたflagを探し出す問題です。
-								画像のバイナリデータにflagが埋め込まれていたり、
-								音声の波形がflagの文字になっていたりとユニークな方法でflagを探しだす問題が多い特徴があります。
 								<iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fspeakerdeck.com%2Fplayer%2F75af7bf7c9c642d094334563e6f7c442&url=https%3A%2F%2Fspeakerdeck.com%2Fkuroiwasi%2Fcpawctf-steganography&image=https%3A%2F%2Fspeakerd.s3.amazonaws.com%2Fpresentations%2F75af7bf7c9c642d094334563e6f7c442%2Fslide_0.jpg&key=internal&type=text%2Fhtml&schema=speakerdeck" width="800" height="630" scrolling="no" frameborder="0" allowfullscreen></iframe>
 							</p>
 							<h3>Misc</h3>
