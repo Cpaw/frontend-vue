@@ -34,7 +34,7 @@ export default {
     var data = {
       labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
       datasets: [{
-        label: ['Your Data'],
+        label: ['The number of correct answers'],
         data: [
           0, 0, 0, 0, 0, 0, 0, 0
         ],
@@ -44,8 +44,16 @@ export default {
       }]
     }
     var options = {
-      tooltips: {
-        mode: 'false'
+      scale: {
+        ticks: {
+          display: false
+        },
+        scaleLabel: {
+          fontColor: '#fff'
+        },
+        gridLines: {
+          color: 'rgba(150, 150, 150, 0.1)'
+        }
       }
     }
     var labels = ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc']
@@ -100,7 +108,7 @@ export default {
           var data = {
             labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
             datasets: [{
-              label: ['Your Data'],
+              label: ['The number of correct answers'],
               data: [
                 web, pwn, crypto, network, binary, forensic, stegano, misc
               ],
