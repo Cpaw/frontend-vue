@@ -137,11 +137,17 @@ h2 {
 button {
     display: block;
     padding: 10px 30px;
-    border: none;
+    border: 2px solid #000;
     margin: 0 auto;
-    background-color: #333;
-    color: #fff;
+    background-color: #111;
+    color: #aaa;
     font-size: 20px;
     text-align: center;
+}
+button:hover {
+    border: 2px solid #222;
+    color: #fff;
+    background-color: #333;
+    cursor: pointer;
 }
 </style>
