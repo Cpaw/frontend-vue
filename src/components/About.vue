@@ -128,7 +128,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
-	font-size: 2.5em;
+	font-size: 2.3em;
 	margin: 30px -10px;
 	padding-left: 5px;
 	border-bottom: 3px solid #5ff;
@@ -137,11 +137,11 @@ h1 {
 h2 {
 	padding-left: 1em;
 	border-bottom: 1px solid #3df;
-	font-size: 2em;
+	font-size: 1.8em;
 }
 
 h3 {
-	font-size: 1.5em;
+	font-size: 1.3em;
 }
 
 h3:before {
