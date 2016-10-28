@@ -5,12 +5,14 @@ import VueResource from 'vue-resource'
 import Home from './components/Home'
 import About from './components/About'
 import Challenges from './components/Challenges'
+import Question from './components/Question'
 import Ranking from './components/Ranking'
 import Notice from './components/Notice'
 import Signin from './components/Signin'
 import Signup from './components/Signup'
 import User from './components/User'
 import $ from 'jquery'
+
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -50,6 +52,9 @@ router.map({
         component: Challenges
       }
     }
+  },
+  '/question/:question_id': {
+    component: Question
   },
   '/ranking': {
     component: Ranking
