@@ -2,18 +2,18 @@
     <article>
         <div class="container">
 	    <div class="contents">
-	        <div class="readable">
-                    <div class="smallbox">
-		    {{ message }}
-		    </div>
-		</div>
+	        <div class="formbox">
+		     <h2>{{ question.title }}</h2>
+		     <div v-html="question.sentence"></div>
+                     <h3>Point: {{ question.points }}</h3>
+                     {{ question.updated_at }}
+	        </div>
             </div>
         </div>
     </article>
 </template>
 
 <script>
-import Chart from 'vue-bulma-chartjs'
 var $ = require('jquery')
 function getCookie (cname) {
   var name = cname + '='
@@ -31,18 +31,17 @@ export default {
     var userdata = this.$root.user
     var question = {
       title: '',
-      ordering: '',
       sentence: '',
       updated_at: '',
       points: ''
     }
-    var postdata: {
+    var postdata = {
       question: '',
       answer: ''
     }
     var message = ''
     return {
-      return userdata, question, postdata
+      userdata, question, postdata, message
     }
   },
   ready: function () {
@@ -62,6 +61,9 @@ export default {
       $.ajax({
         type: 'POST',
         crossDomain: true,
+        xhrFields: {
+          withCredentials: true
+        },
         url: this.$root.apiroot + 'answer/',
         dataType: 'json',
         data: {'csrfmiddlewaretoken': csrftoken, 'question': this.postdata.question, 'answer': this.postdata.answer},

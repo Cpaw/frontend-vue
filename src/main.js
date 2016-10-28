@@ -13,7 +13,6 @@ import Signup from './components/Signup'
 import User from './components/User'
 import $ from 'jquery'
 
-
 Vue.use(VueRouter)
 Vue.use(VueResource)
 

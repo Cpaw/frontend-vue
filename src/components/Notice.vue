@@ -15,8 +15,8 @@
                         <ul id="object">
                             <li class="notice_instance" v-for="notice in reverse" >
                                 <div v-if="notice.priority == vm.state" class="notice_title">
-                                    <h2>{{ notice.title }}</h2>
-                                </div>
+                                    <h2>{{ notice.title }}</h2> 
+                               </div>
                                 <div v-if="notice.priority == vm.state" class="notice_body">
                                     <div v-html="notice.description"></div>
                                 </div>
