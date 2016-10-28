@@ -4,7 +4,7 @@
 	    <div class="contents">
 	        <div class="readable">
                     <div class="smallbox">
-
+		    {{ message }}
 		    </div>
 		</div>
             </div>
@@ -15,10 +15,18 @@
 <script>
 import Chart from 'vue-bulma-chartjs'
 var $ = require('jquery')
+function getCookie (cname) {
+  var name = cname + '='
+  var ca = document.cookie.split(';')
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) === ' ') c = c.substring(1)
+    if (c.indexOf(name) !== -1) return c.substring(name.length, c.length)
+  }
+  return ''
+}
+var csrftoken = getCookie('csrftoken')
 export default {
-  components: {
-    Chart
-  },
   data () {
     var userdata = this.$root.user
     var question = {
@@ -28,8 +36,13 @@ export default {
       updated_at: '',
       points: ''
     }
+    var postdata: {
+      question: '',
+      answer: ''
+    }
+    var message = ''
     return {
-      return userdata, question
+      return userdata, question, postdata
     }
   },
   ready: function () {
@@ -45,19 +58,22 @@ export default {
     })
   },
   methods: {
-    getQuestion: function () {
-    },
     Answer: function () {
-      var that = this
       $.ajax({
-        type: 'GET',
+        type: 'POST',
         crossDomain: true,
         url: this.$root.apiroot + 'answer/',
         dataType: 'json',
-        success: function (json) {
-          
+        data: {'csrfmiddlewaretoken': csrftoken, 'question': this.postdata.question, 'answer': this.postdata.answer},
+        beforesend: function (output, status, xhr) {
+          csrftoken = getCookie('csrftoken')
         },
-        data: null
+        success: function (json) {
+          this.message = 'Correct!!'
+        },
+        error: function (json) {
+          this.message = json.error
+        }
       })
     }
   }
