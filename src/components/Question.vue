@@ -45,18 +45,22 @@ export default {
     }
   },
   ready: function () {
-    $.ajax({
-      type: 'GET',
-      crossDomain: true,
-      url: this.$root.apiroot + 'questions/' + this.$route.params.question_id + '/',
-      dataType: 'json',
-      success: function (json) {
-        this.question = json
-      },
-      data: null
-    })
+    this.getQuestion()
   },
   methods: {
+    getQuestion: function () {
+      var that = this
+      $.ajax({
+        type: 'GET',
+        crossDomain: true,
+        url: this.$root.apiroot + 'questions/' + this.$route.params.question_id + '/',
+        dataType: 'json',
+        success: function (json) {
+          that.$data.question = json
+        },
+        data: null
+      })
+    },
     Answer: function () {
       $.ajax({
         type: 'POST',

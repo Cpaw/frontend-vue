@@ -63,8 +63,7 @@ export default {
       }
     ]
     return {
-      notices,
-      vm
+      notices, vm
     }
   },
   ready: function () {
