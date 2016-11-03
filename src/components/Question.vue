@@ -7,7 +7,8 @@
 		    <div v-html="question.sentence"></div>
                     <h2>Point: {{ question.points }}</h2>
                     {{ question.updated_at }}
-		    <form v-on:submit.prevent="answer">
+		    {{ message }}
+		    <form v-on:submit.prevent="Answer">
 		    	<div class="field">
 		            <label for="flag-submit">Flag: </label>
 			    <input id="flag-submit" type="text" name="flag" placeholder="flag" v-model="postdata.answer">
@@ -45,7 +46,7 @@ export default {
       points: ''
     }
     var postdata = {
-      question: '',
+      question: this.$route.params.question_id,
       answer: ''
     }
     var message = ''
@@ -77,7 +78,7 @@ export default {
         xhrFields: {
           withCredentials: true
         },
-        url: this.$root.apiroot + 'answer/',
+        url: this.$root.apiroot + 'answers/',
         dataType: 'json',
         data: {'csrfmiddlewaretoken': csrftoken, 'question': this.postdata.question, 'answer': this.postdata.answer},
         beforesend: function (output, status, xhr) {
