@@ -3,10 +3,19 @@
         <div class="container">
 	    <div class="contents">
 	        <div class="formbox">
-		     <h2>{{ question.title }}</h2>
-		     <div v-html="question.sentence"></div>
-                     <h3>Point: {{ question.points }}</h3>
-                     {{ question.updated_at }}
+		    <h1>{{ question.title }}</h1>
+		    <div v-html="question.sentence"></div>
+                    <h2>Point: {{ question.points }}</h2>
+                    {{ question.updated_at }}
+		    <form v-on:submit.prevent="answer">
+		    	<div class="field">
+		            <label for="flag-submit">Flag: </label>
+			    <input id="flag-submit" type="text" name="flag" placeholder="flag" v-model="postdata.answer">
+			</div>
+			<div class="field">
+			    <button type="submit">Submit</button>
+			</div>
+		    </form>
 	        </div>
             </div>
         </div>

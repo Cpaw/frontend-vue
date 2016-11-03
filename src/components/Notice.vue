@@ -21,7 +21,6 @@
                                     <div v-html="notice.description"></div>
                                 </div>
                                 <div v-if="notice.priority == vm.state" class="notice_footer">
-				
                                     {{ notice.created_at }}
                                 </div>
                             </li>
