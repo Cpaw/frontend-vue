@@ -2,22 +2,29 @@
     <article>
         <div class="container">
 	    <div class="contents">
-	        <div class="formbox">
-		    <h1>{{ question.title }}</h1>
-		    <div v-html="question.sentence"></div>
-                    <h2>Point: {{ question.points }}</h2>
-                    {{ question.updated_at }}
-		    {{ message }}
-		    <form v-on:submit.prevent="Answer">
-		    	<div class="field">
-		            <label for="flag-submit">Flag: </label>
-			    <input id="flag-submit" type="text" name="flag" placeholder="flag" v-model="postdata.answer">
-			</div>
-			<div class="field">
-			    <button type="submit">Submit</button>
-			</div>
-		    </form>
-	        </div>
+	    	<div class="readable">
+	    	    <div class='smallbox'>
+	            <div class="formbox">
+		        <h1>{{ question.title }}</h1>
+		    	<div v-html="question.sentence"></div>
+			<h2>Point: {{ question.points }}</h2>
+		    	{{ message }}
+		    	<form v-on:submit.prevent="Answer">
+		    	    <div class="field" v-if=flag>
+			    
+		            	<label for="flag-submit">Flag: </label>
+			    	<input id="flag-submit" type="text" name="flag" placeholder="flag" v-model="postdata.answer">
+			    <div class="field">
+			    	 <button type="submit">Submit</button>
+			    </div>
+			    </div>
+			    <div class="field" v-else>
+			        <h2>Congratulations!! You solved!!</h2>
+			    </div>
+		    	</form>
+	            </div>
+		    </div>
+		</div>
             </div>
         </div>
     </article>
@@ -39,6 +46,9 @@ var csrftoken = getCookie('csrftoken')
 export default {
   data () {
     var userdata = this.$root.user
+    var questions = [{
+      id: ''
+    }]
     var question = {
       title: '',
       sentence: '',
@@ -50,12 +60,14 @@ export default {
       answer: ''
     }
     var message = ''
+    var flag = 1
     return {
-      userdata, question, postdata, message
+      userdata, questions, question, postdata, message, flag
     }
   },
   ready: function () {
     this.getQuestion()
+    this.getTeam()
   },
   methods: {
     getQuestion: function () {
@@ -69,6 +81,23 @@ export default {
           that.$data.question = json
         },
         data: null
+      })
+    },
+    getTeam: function () {
+      var that = this
+      $.ajax({
+        type: 'GET',
+        crossDomain: true,
+        url: this.$root.apiroot + 'teams/' + this.$root.user.team + '/',
+        dataType: 'json',
+        success: function (json) {
+          that.$data.questions = json.questions
+          $.each(that.$data.questions, function (i) {
+            if (that.$data.questions[i].id === that.$data.question.id) {
+              that.$data.flag = 0
+            }
+          })
+        }
       })
     },
     Answer: function () {
@@ -85,10 +114,10 @@ export default {
           csrftoken = getCookie('csrftoken')
         },
         success: function (json) {
-          this.message = 'Correct!!'
+          window.location.reload()
         },
         error: function (json) {
-          this.message = json.error
+          window.location.reload()
         }
       })
     }
@@ -115,33 +144,6 @@ h2:before {
 
 section {
   margin-bottom: 3em;
-}
-
-polygon {
-    fill: #42b983;
-    opacity: .75;
-}
-
-.notice_container li {
-    list-style-type: none;
-}
-
-.notice_instance {
-    margin: 1em 0;
-}
-
-.notice_title {
-    padding: 0 1em;
-    border-bottom: 1px solid #33ddff;
-}
-
-.notice_body {
-    padding: 0.5em 1em;  
-}
-
-.notice_footer {
-    padding: 0 1em;
-    text-align: right;
 }
 
 ul {
@@ -194,4 +196,50 @@ ul.note
 	background-color: #aaa;
 }
 
+field {
+      width: 240px;
+      margin: 30px auto;
+      color: #fff;
+      font-size: 20px;
+      text-align: left;
+}
+
+.field input {
+       box-sizing: border-box;
+       width: 100%;
+       padding: 14px;
+       border: none;
+       outline: none;
+       margin-top: 10px;
+       background-color: rgba(34, 34, 34, .7);
+       background-size: 0% 1px;
+       color: #eee;
+       font-size: 16px;
+       transition: background-size 0.3s ease;
+}
+
+.field input:focus {
+       background-image: linear-gradient(#3df, #3df);
+       background-position: centr bottom;
+       background-size: 100% 1px;
+       background-repeat: no-repeat;
+}
+
+button {
+       display: block;
+       padding: 10px 30px;
+       border: 2px solid #000;
+       margin: 0 auto;
+       background-color: #111;
+       color: #aaa;
+       font-size: 20px;
+       text-align: center;
+}
+
+button:hover {
+       border: 3px solid #222;
+       color: #fff;
+       background-color: #333;
+       cursor: pointer;
+}	     
 </style>
