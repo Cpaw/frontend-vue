@@ -4,9 +4,10 @@
       <div class="contents">
         <div class="formbox">
           <h2>Sign in</h2>
-          <div class="message" v-if="hasMessage">
-            {{ message }} 
+          <div class="message">
+            <div id="error_code"></div>
           </div>
+	  
           <form v-on:submit.prevent="signin">
             <div class="field">
               <label for="signin-email">User name: <br></label>
@@ -45,13 +46,7 @@ export default {
       postdata: {
         username: '',
         password: ''
-      },
-      message: ''
-    }
-  },
-  computed: {
-    hasMessage: function () {
-      return this.message !== ''
+      }
     }
   },
   init: function () {
@@ -85,10 +80,8 @@ export default {
       ).done(function (data, vm) {
         vm.$root.user = data[0]
         this.$root.auth = true
-        vm.$route.router.go('challenges')
       }).fail(function (a, b, c) {
-        this.$root.user = null
-        this.message = b
+        document.getElementById('error_code').innerHTML = '<p>Invalid input data.</p>'
       })
     }
   }
@@ -103,6 +96,15 @@ h2 {
 
 .formbox {
     color: white;
+}
+
+.message {
+    margin: 0 auto;
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 10 0;
+    width: 30%;
 }
 
 .field {

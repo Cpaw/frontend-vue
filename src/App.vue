@@ -13,9 +13,10 @@ import Foot from './components/Foot'
 export default {
   data: function () {
     return {
-      apiroot: 'http://172.16.125.199/api/',
+      apiroot: 'http://ptest.cpaw.site/api/',
       user: null,
-      authed: false
+      authed: false,
+      error: false
     }
   },
   components: {
