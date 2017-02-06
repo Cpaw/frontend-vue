@@ -15,7 +15,7 @@
               </div>
               <div class="field">
                <label for="signin-email">Email: <br></label>
-               <input id="signin-email" type="text" name="email" placeholder="email" v-model='userdata.email'>
+               <input id="signin-email" type="text" name="email" placeholder="email" v-model="userdata.email" v-validate="email">
               </div>
               <div class="field">
                <label for="signin-passwd">Password: <br></label>
@@ -46,6 +46,16 @@ export default {
   init: function () {
     if (this.$root.user !== null) {
       this.$route.router.go('/challenges')
+    }
+  },
+  validator: {
+    validates: {
+      email: function (val) {
+        return /^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/.test(val)
+      },
+      match: function (val, model) {
+        return val === this[model]
+      }
     }
   },
   methods: {
