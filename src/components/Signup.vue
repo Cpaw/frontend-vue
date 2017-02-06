@@ -77,6 +77,15 @@ h2 {
     font-size: 40px;
 }
 
+.message {
+    margin: 0 auto;
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 10 0;
+    width: 30%;
+}
+
 button {
     display: block;
     padding: 10px 30px;
