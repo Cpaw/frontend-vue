@@ -4,6 +4,10 @@
         <div class="contents">
           <div class="formbox">
             <h2>Sign up</h2>
+	    <div class="message">
+	      <div id="error_code"></div>
+            </div>
+
             <form v-on:submit.prevent="signup">
               <div class="field">
                <label for="signup-name">User name: <br></label>
@@ -52,12 +56,15 @@ export default {
         crossDomain: true,
         url: this.$root.apiroot + 'users/',
         dataType: 'json',
+        data: that.$data.userdata,
         success: function (json) {
           that.$data.userdata = json
           window.location.href = '#!/signin'
           window.location.reload()
         },
-        data: that.$data.userdata
+        error: function (json) {
+          document.getElementById('error_code').innerHTML = '<p>Invalid input data.</p>'
+        }
       })
     }
   }
