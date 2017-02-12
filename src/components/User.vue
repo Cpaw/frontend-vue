@@ -32,7 +32,7 @@ export default {
       }
     ]
     var data = {
-      labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
+      labels: ['Web', 'Network', 'crypto', 'Reverse', 'Pwn', 'Forensic', 'Stego', 'Misc'],
       datasets: [{
         label: ['The number of correct answers'],
         data: [
@@ -56,7 +56,7 @@ export default {
         }
       }
     }
-    var labels = ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc']
+    var labels = ['Web', 'Network', 'Crypto', 'Reverse', 'Pwn', 'Forensic', 'Stego', 'Misc']
     var backgroundColor = [
       'rgba(31, 200, 219, 1)'
     ]
@@ -79,10 +79,10 @@ export default {
         success: function (json) {
           that.$data.questions = json.questions
           var web = 0
-          var pwn = 0
-          var crypto = 0
           var network = 0
-          var binary = 0
+          var crypto = 0
+          var reverse = 0
+          var pwn = 0
           var forensic = 0
           var stegano = 0
           var misc = 0
@@ -90,13 +90,13 @@ export default {
             if (that.$data.questions[i].cat === 1) {
               web += 1
             } else if (that.$data.questions[i].cat === 2) {
-              pwn += 1
+              network += 1
             } else if (that.$data.questions[i].cat === 3) {
               crypto += 1
             } else if (that.$data.questions[i].cat === 4) {
-              network += 1
+              reverse += 1
             } else if (that.$data.questions[i].cat === 5) {
-              binary += 1
+              pwn += 1
             } else if (that.$data.questions[i].cat === 6) {
               forensic += 1
             } else if (that.$data.questions[i].cat === 7) {
@@ -106,11 +106,11 @@ export default {
             }
           })
           var data = {
-            labels: ['web', 'pwn', 'crypto', 'network', 'binary', 'forensic', 'stegano', 'misc'],
+            labels: ['Web', 'Network', 'Crypto', 'Reverse', 'Pwn', 'Forensic', 'Stego', 'Misc'],
             datasets: [{
               label: ['The number of correct answers'],
               data: [
-                web, pwn, crypto, network, binary, forensic, stegano, misc
+                web, network, crypto, reverse, pwn, forensic, stegano, misc
               ],
               borderColor: 'rgba(31, 200, 219, 1)'.replace(/1\)$/, '.5)'),
               pointBackgroundColor: 'rgba(31, 200, 219, 1)',

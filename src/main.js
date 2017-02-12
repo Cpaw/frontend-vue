@@ -22,7 +22,7 @@ var getAuthState = function () {
   return $.when(
     $.ajax(
       {
-        url: 'http://ptest.cpaw.site/api/auth/',
+        url: 'https://ctf2.cpaw.site/api/auth/',
         type: 'GET',
         dataType: 'json',
         crossDomain: true,

@@ -13,7 +13,7 @@ import Foot from './components/Foot'
 export default {
   data: function () {
     return {
-      apiroot: 'http://ptest.cpaw.site/api/',
+      apiroot: 'https://ctf2.cpaw.site/api/',
       user: null,
       authed: false,
       error: false
@@ -35,6 +35,10 @@ html, body
   padding: 0;
   background-color: #222;
   font-family: 'Proza Libre', sans-serif;
+}
+
+a {
+  color: #00ffff;
 }
 
 #app {
