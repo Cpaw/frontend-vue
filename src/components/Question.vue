@@ -11,7 +11,7 @@
 		    	{{ message }}
 		    	<form v-on:submit.prevent="Answer">
 		    	    <div class="field" v-if=flag>
-			    
+			    	<div id="error_code"></div>			    
 		            	<label for="flag-submit">Flag: </label>
 			    	<input id="flag-submit" type="text" name="flag" placeholder="flag" v-model="postdata.answer">
 			    <div class="field">
@@ -117,7 +117,7 @@ export default {
           window.location.reload()
         },
         error: function (json) {
-          window.location.reload()
+          document.getElementById('error_code').innerHTML = '<p>Wrong...</p>'
         }
       })
     }
@@ -242,4 +242,11 @@ button:hover {
        background-color: #333;
        cursor: pointer;
 }	     
+#error_code {
+       margin: 0 auto;
+       background-color: red;
+       color: white;
+       text-align: center;
+       width: 100%;
+}
 </style>
