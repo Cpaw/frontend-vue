@@ -8,16 +8,16 @@
 	  <pre>
 	  <h3>Rule:</h3>
 	  ・Don’t attack this score-server.<br>
-	  ・This CTF is unlimited. So, please publish writeup just in local place.
+	  ・This CTF is unlimited. So, <strong>please publish writeup just in local place.</strong>
 
 	  <h3>Server:</h3>
 	  ・Made by palloc, nomuken, Schwarz_Sardine
 
 	  <h4>Problem:</h4>
-	  ・Made by palloc, chihiro, ariake<br>
-	  ・Reviewed by n4nu, takahoyo<br>
+	  ・Made by palloc, chihiro, ariake, takahoyo<br>
+	  ・Reviewed by n4nu, icchy<br>
 	  <br>
-	  If you have some questions, please ask to cpaw.createam[at]gmail.com
+	  If you have some questions, please ask to cpaw.createam[at]gmail.com or twitter: @porisuteru
 	  </pre>
 	  </div>
 	</div>
